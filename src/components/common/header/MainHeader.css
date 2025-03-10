@@ -1,0 +1,28 @@
+.mainHeader-container {
+  display: flex;
+  width: 100%;
+  top: 0;
+}
+
+.mainHeader {
+  width: 100%;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 24px;
+  background-color: white;
+  position: relative;
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.mainHeader-icon {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}

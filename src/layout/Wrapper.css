@@ -1,0 +1,33 @@
+.wrapper {
+  width: 100%;
+  max-width: 375px;
+  height: 100%;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  background-color: #ffffff;
+  /* 화면 경계 확인*/
+  /* border: 1px solid #000000; */
+}
+
+/* 작은 모바일 화면 */
+/* @media (max-width: 374px) {
+  .wrapper {
+    padding: 0 10px;
+  }
+} */
+
+/* 태블릿 이상 화면에서도 모바일 레이아웃 유지 */
+@media (min-width: 768px) {
+  .wrapper {
+    /* 화면이 큰 경우에도 모바일 뷰 유지 */
+    max-width: 375px;
+  }
+
+  /* 배경 이미지 */
+  body {
+    background-color: #f5f5f5; /* 임시 배경색 */
+  }
+}

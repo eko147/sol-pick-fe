@@ -1,0 +1,39 @@
+.noti-item {
+  display: flex;
+  flex-direction: row;
+  padding: 12px 28px;
+  align-items: center;
+}
+
+.noti-icon {
+  width: 36px;
+  height: 36px;
+}
+
+.noti-description {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: auto;
+}
+
+.noti-type {
+  color: #7b68ee;
+  font-size: 10px;
+  line-height: 100%;
+  letter-spacing: -0.03em;
+}
+
+.noti-detail {
+  font-size: 12px;
+  line-height: 160%;
+  letter-spacing: -0.03em;
+}
+
+.noti-item-time {
+  color: #969696;
+  font-size: 10px;
+  line-height: 100%;
+  letter-spacing: -0.03em;
+}

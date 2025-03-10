@@ -1,0 +1,22 @@
+.noti-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.noti-group .noti-date {
+  color: #969696;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: -0.03em;
+  padding: 12px 16px 0 16px;
+}
+
+.noti-empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 102px);
+  color: #969696;
+  font-size: 14px;
+}
