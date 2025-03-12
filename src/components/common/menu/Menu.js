@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./Menu.css";
 import refrigerator from "../../../assets/refrigerator.svg";
 import refrigeratorActive from "../../../assets/refrigeratorActive.svg";
@@ -13,6 +13,7 @@ import mypageActive from "../../../assets/mypageActive.svg";
 const Menu = () => {
   const [activeMenu, setActiveMenu] = useState("home");
   const navigate = useNavigate();
+  const location = useLocation(); // 현재 URL 경로 가져오기
 
   const menuItems = [
     {
@@ -44,6 +45,19 @@ const Menu = () => {
       path: "/mypage",
     },
   ];
+
+  // 경로 변경될 때마다 activeMenu 상태 업데이트
+  useEffect(() => {
+    const currentPath = location.pathname;
+
+    // 현재 경로에 맞는 메뉴 ID 찾기
+    const currentMenu = menuItems.find((item) =>
+      currentPath.startsWith(item.path)
+    );
+
+    // 일치하는 메뉴가 있으면 활성화, 없으면 기본값(home)으로 설정
+    setActiveMenu(currentMenu ? currentMenu.id : "home");
+  }, [location.pathname]);
 
   const handleMenuClick = (menuId) => {
     setActiveMenu(menuId);

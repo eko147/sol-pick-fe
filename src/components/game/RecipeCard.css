@@ -1,0 +1,21 @@
+.recipe-card {
+  aspect-ratio: 1/1;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+  transition: all 0.2s ease-in-out;
+}
+
+.recipe-card.selected {
+  border: 2px solid #7b68ee;
+  box-shadow: 0 0 4px rgba(123, 104, 238, 0.5);
+}
+
+/* 모바일 터치 최적화 */
+.recipe-card:active {
+  transform: scale(0.98);
+}

@@ -1,6 +1,13 @@
 import "./Header.css";
 
-const Header = ({ leftIcon, title, rightIcon, onLeftClick, onRightClick }) => {
+const Header = ({
+  leftIcon,
+  title,
+  rightIcon,
+  onLeftClick,
+  onRightClick,
+  titleStyle = {}, // 새로운 prop 추가: 제목 스타일 커스터마이징용
+}) => {
   return (
     <header className="header-container">
       <div className="header">
@@ -12,7 +19,12 @@ const Header = ({ leftIcon, title, rightIcon, onLeftClick, onRightClick }) => {
             onClick={onLeftClick}
           />
         )}
-        <div className="header-title bold">{title}</div>
+
+        {/* style prop에 titleStyle 객체를 적용 */}
+        <div className="header-title bold" style={titleStyle}>
+          {title}
+        </div>
+
         {rightIcon && (
           <img
             className="header-icon"
