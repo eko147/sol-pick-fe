@@ -25,6 +25,7 @@ import CardApplyInfoPage from "./pages/card/CardApplyInfoPage"; // 카드 신청
 import CardCompletionPage from "./pages/card/CardCompletionPage"; // 카드 발급 완료 페이지 추가
 import LoginPage from './pages/auth/LoginPage';//로그인페이지
 import MyPage from "./pages/mypage/MyPage";//마이페이지
+import OrderHistoryPage from "./pages/mypage/OrderHistoryPage";
 
 
 import RecipeSelectionPage from "./pages/game/RecipeSelectionPage"; // 레시피 선택 페이지
@@ -47,6 +48,9 @@ function App() {
 
         {/* 마이페이지 */}
         <Route path="/mypage" element={<MyPage />} />
+
+        {/* 마이페이지/결제내역 */}
+        <Route path="/orders" element={<OrderHistoryPage />} />
 
         {/* 알림 */}
         <Route path="/noti" element={<Noti />} />

@@ -44,25 +44,3 @@ export const postData = async (url, data, options = {}) => {
         throw error;
     }
 };
-
-// // 파일 업로드 등 멀티파트 요청을 위한 함수
-// export const uploadFile = async (url, formData, options = {}) => {
-//     try {
-//         const response = await axios.post(url, formData, {
-//             ...options,
-//             headers: {
-//                 ...options.headers,
-//                 'Content-Type': 'multipart/form-data',
-//                 ...authApi.getAuthHeader()
-//             }
-//         });
-
-//         return response.data;
-//     } catch (error) {
-//         if (error.response && error.response.status === 401) {
-//             authApi.logout();
-//             window.location.href = '/login';
-//         }
-//         throw error;
-//     }
-// };

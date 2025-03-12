@@ -62,6 +62,7 @@ const MyPageContent = () => {
         }
     ];
 
+
     return (
         <div className="mypage-container">
             <div className="mypage-header">
