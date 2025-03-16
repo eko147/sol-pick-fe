@@ -5,7 +5,7 @@ import { authApi } from './AuthApi';
 const BASE_URL = 'http://localhost:8090';
 
 export const orderApi = {
-    getOrderHistory: async (memberId) => {
+    getOrderHistory: async () => {
         try {
             const response = await axios.get(`${BASE_URL}/api/member/order`, {
                 headers: {

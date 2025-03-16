@@ -17,7 +17,7 @@
 .mypage-menu-item:hover {
   transform: translateY(-2px);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #7b68ee0d;
+  background-color: #0a84ff0d;
 }
 
 .mypage-menu-item:active {

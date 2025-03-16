@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -39,6 +39,7 @@
 }
 
 .popup-description {
+  white-space: pre-line; /* 줄바꿈 문자를 실제 줄바꿈으로 처리 */
   font-size: 14px;
   line-height: 160%;
   letter-spacing: 0;

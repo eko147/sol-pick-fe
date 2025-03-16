@@ -10,10 +10,10 @@ import Header from "../components/common/header/Header";
 import backArrow from "../assets/backArrow.svg";
 import close from "../assets/close.svg";
 import MainHeader from "../components/common/header/MainHeader";
-import noti from "../assets/noti.svg";
-import notiActive from "../assets/notiActive.svg";
-import shop from "../assets/shop.svg";
-import shopActive from "../assets/shopActive.svg";
+// import noti from "../assets/noti.svg";
+// import notiActive from "../assets/notiActive.svg";
+// import shop from "../assets/shop.svg";
+// import shopActive from "../assets/shopActive.svg";
 import Menu from "../components/common/menu/Menu";
 import ToastMessage from "../components/common/toastmessage/ToastMessage";
 import Chip from "../components/common/chip/Chip";
@@ -138,10 +138,10 @@ const Components = () => {
       <br />
 
       <MainHeader
-        leftIcon={shop}
-        leftIconActive={shopActive}
-        rightIcon={noti}
-        rightIconActive={notiActive}
+        // leftIcon={shop}
+        // leftIconActive={shopActive}
+        // rightIcon={noti}
+        // rightIconActive={notiActive}
         // onLeftClick={}
         // onRightClick={}
       />

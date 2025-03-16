@@ -1,18 +1,18 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import MainHeader from "../../components/common/header/MainHeader";
-import noti from "../../assets/noti.svg";
-import notiActive from "../../assets/notiActive.svg";
-import shop from "../../assets/shop.svg";
-import shopActive from "../../assets/shopActive.svg";
+// import noti from "../../assets/noti.svg";
+// import notiActive from "../../assets/notiActive.svg";
+// import shop from "../../assets/shop.svg";
+// import shopActive from "../../assets/shopActive.svg";
 import Menu from "../../components/common/menu/Menu";
 import "./CardIssuePage.css";
 
 // 메인 컴포넌트
 const CardIssuePage = () => {
-  const navigateToShop = () => {};
+  // const navigateToShop = () => {};
 
-  const navigateToNoti = () => {};
+  // const navigateToNoti = () => {};
 
   const navigate = useNavigate();
 
@@ -27,12 +27,12 @@ const CardIssuePage = () => {
   return (
     <div className="card-issue-page-container">
       <MainHeader
-        leftIcon={shop}
-        leftIconActive={shopActive}
-        rightIcon={noti}
-        rightIconActive={notiActive}
-        onLeftClick={navigateToShop}
-        onRightClick={navigateToNoti}
+        // leftIcon={shop}
+        // leftIconActive={shopActive}
+        // rightIcon={noti}
+        // rightIconActive={notiActive}
+        // onLeftClick={navigateToShop}
+        // onRightClick={navigateToNoti}
       />
 
       <div

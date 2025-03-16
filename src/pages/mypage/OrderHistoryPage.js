@@ -26,11 +26,11 @@ const OrderHistoryPage = () => {
         fetchOrderHistory(currentUser.id);
     }, [navigate]);
 
-    const fetchOrderHistory = async (memberId) => {
+    const fetchOrderHistory = async () => {
         setLoading(true);
         try {
             // API 클라이언트를 통해 주문 내역 가져오기
-            const data = await orderApi.getOrderHistory(memberId);
+            const data = await orderApi.getOrderHistory();
             setOrderHistory(data);
         } catch (err) {
             console.error("주문 내역 조회 오류:", err);

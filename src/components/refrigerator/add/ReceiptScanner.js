@@ -2,11 +2,20 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import "./ReceiptScanner.css";
 import closeIcon from "../../../assets/close.svg";
+import noResult from "../../../assets/noResult.svg";
 import cameraIcon from "../../../assets/camera.svg";
-import ButtonS from "../../common/button/ButtonS"; // ButtonS 컴포넌트 import
+import ButtonS from "../../common/button/ButtonS";
+import ToastMessage from "../../../components/common/toastmessage/ToastMessage";
+import { ingredientApi } from "../../../api/IngredientApi";
+import { USE_MOCK_DATA } from "../../../config";
+import { useNavigate } from "react-router-dom";
 
 const ReceiptScanner = ({ isOpen, onClose, onScanComplete }) => {
-  const [stage, setStage] = useState("camera"); // camera, loading, results
+  const navigate = useNavigate();
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+
+  const [stage, setStage] = useState("camera"); // camera, loading, noIngredients
   const [capturedImage, setCapturedImage] = useState(null);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const videoRef = useRef(null);
@@ -40,7 +49,8 @@ const ReceiptScanner = ({ isOpen, onClose, onScanComplete }) => {
       streamRef.current = stream;
     } catch (err) {
       console.error("카메라 접근 오류:", err);
-      alert("카메라에 접근할 수 없습니다.");
+      setToastMessage("카메라에 접근할 수 없습니다.");
+      setShowToast(true);
     }
   };
 
@@ -77,26 +87,73 @@ const ReceiptScanner = ({ isOpen, onClose, onScanComplete }) => {
       setStage("loading");
 
       // 로딩 진행 시뮬레이션
-      simulateLoading();
+      simulateLoading(imageDataUrl);
     }
   };
 
   // 로딩 시뮬레이션 함수
-  const simulateLoading = () => {
+  const simulateLoading = (imageData) => {
     setLoadingProgress(0);
     const interval = setInterval(() => {
       setLoadingProgress((prev) => {
-        if (prev >= 100) {
+        if (prev >= 90) {
           clearInterval(interval);
-          // OCR 처리 완료 후 다음 단계로 이동
-          setTimeout(() => {
-            onScanComplete(capturedImage);
-          }, 500);
-          return 100;
+
+          // 목업 데이터 사용 여부 확인
+          if (USE_MOCK_DATA) {
+            setTimeout(() => {
+              setLoadingProgress(100);
+              // 목업 데이터 (테스트용)
+              const mockOcrResult = {
+                ingredientNames: ["딸기", "양파"],
+              };
+
+              setTimeout(() => {
+                if (mockOcrResult.ingredientNames.length > 0) {
+                  onScanComplete(imageData, mockOcrResult.ingredientNames);
+                } else {
+                  // 인식된 식재료 없음
+                  setStage("noIngredients");
+                }
+              }, 500);
+            }, 1000);
+          } else {
+            // 실제 OCR API 호출
+            processReceiptOcr(imageData);
+          }
+          return 90;
         }
         return prev + 5;
       });
-    }, 300);
+    }, 200);
+  };
+
+  // 실제 OCR API 호출 함수
+  const processReceiptOcr = async (imageData) => {
+    try {
+      const result = await ingredientApi.processReceiptOcr(imageData);
+      setLoadingProgress(100);
+
+      if (result.success) {
+        if (result.ingredientNames && result.ingredientNames.length > 0) {
+          setTimeout(() => {
+            onScanComplete(imageData, result.ingredientNames);
+          }, 500);
+        } else {
+          // 인식된 식재료가 없을 때 noIngredients 상태로 전환
+          setStage("noIngredients");
+        }
+      } else {
+        setToastMessage("영수증 인식에 실패했습니다. 다시 시도해주세요.");
+        setShowToast(true);
+        retakePhoto();
+      }
+    } catch (error) {
+      console.error("OCR 처리 오류:", error);
+      setToastMessage("영수증 처리 중 오류가 발생했습니다.");
+      setShowToast(true);
+      retakePhoto();
+    }
   };
 
   // 다시 촬영하기
@@ -108,6 +165,14 @@ const ReceiptScanner = ({ isOpen, onClose, onScanComplete }) => {
 
   // 버튼 비활성화 상태 계산
   const isRetakeButtonDisabled = loadingProgress > 80;
+
+  // 로딩 상태 메시지 결정
+  const getLoadingStatusMessage = () => {
+    if (loadingProgress < 30) return "영수증 이미지 분석 중...";
+    if (loadingProgress < 60) return "텍스트 인식 중...";
+    if (loadingProgress < 90) return "식재료명 정보 추출 중...";
+    return "거의 완료되었습니다...";
+  };
 
   return (
     <motion.div
@@ -127,6 +192,7 @@ const ReceiptScanner = ({ isOpen, onClose, onScanComplete }) => {
       </div>
 
       <div className="receipt-scanner-content">
+        {/* 카메라 스테이지 */}
         {stage === "camera" && (
           <div className="camera-view">
             {/* 비디오 미리보기 */}
@@ -156,6 +222,7 @@ const ReceiptScanner = ({ isOpen, onClose, onScanComplete }) => {
           </div>
         )}
 
+        {/* 로딩 스테이지 */}
         {stage === "loading" && (
           <div className="loading-view">
             <div className="captured-receipt">
@@ -168,16 +235,7 @@ const ReceiptScanner = ({ isOpen, onClose, onScanComplete }) => {
                 style={{ width: `${loadingProgress}%` }}
               ></div>
             </div>
-            <div className="loading-status">
-              {loadingProgress < 30 && "영수증 이미지 분석 중..."}
-              {loadingProgress >= 30 &&
-                loadingProgress < 60 &&
-                "텍스트 인식 중..."}
-              {loadingProgress >= 60 &&
-                loadingProgress < 90 &&
-                "식재료명 정보 추출 중..."}
-              {loadingProgress >= 90 && "거의 완료되었습니다..."}
-            </div>
+            <div className="loading-status">{getLoadingStatusMessage()}</div>
             <div className="retake-button-container">
               <ButtonS
                 text="다시 촬영하기"
@@ -190,7 +248,41 @@ const ReceiptScanner = ({ isOpen, onClose, onScanComplete }) => {
             </div>
           </div>
         )}
+
+        {/* 식재료 0개 인식 스테이지 */}
+        {stage === "noIngredients" && (
+          <div className="no-ingredients-view">
+            <img src={noResult} alt="noResult" className="no-result-icon" />
+            <h3 className="no-ingredients-title bold">
+              식재료를 인식하지 못했어요
+            </h3>
+            <p className="no-ingredients-description">
+              영수증을 명확하게 촬영해주세요.
+              <br />
+              글자가 잘 보이도록 빛 반사를 조심하고,
+              <br />
+              카메라를 가까이 또는 멀리 조절해보세요.
+            </p>
+            <div className="no-ingredients-actions">
+              <ButtonS
+                text="직접 입력하기"
+                variant="outlined"
+                onClick={() => {
+                  navigate("/refrigerator/add");
+                  onClose(); // 현재 스캐너 닫기
+                }}
+              />
+              <ButtonS
+                text="다시 촬영하기"
+                variant="filled"
+                onClick={retakePhoto}
+              />
+            </div>
+          </div>
+        )}
       </div>
+
+      {showToast && <ToastMessage message={toastMessage} duration={3000} />}
     </motion.div>
   );
 };

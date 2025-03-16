@@ -34,7 +34,7 @@
 }
 
 .game-intro-text {
-  font-size: 22px;
+  font-size: 18px;
   font-weight: bold;
   color: white;
   text-align: center;
@@ -49,7 +49,7 @@
   border: none;
   border-radius: 15px;
   padding: 15px 30px;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   cursor: pointer;
   transition: transform 0.2s, background-color 0.3s;
@@ -74,21 +74,5 @@
   }
   100% {
     transform: translateY(-10px);
-  }
-}
-
-/* 모바일 화면에 대한 반응형 스타일 */
-@media (max-width: 480px) {
-  .greeting-text {
-    font-size: 28px;
-  }
-
-  .rainbow-cat {
-    width: 180px;
-  }
-
-  .start-button {
-    font-size: 18px;
-    padding: 12px 24px;
   }
 }

@@ -1,9 +1,9 @@
 import "./Main.css";
 import MainHeader from "../../components/common/header/MainHeader";
-import noti from "../../assets/noti.svg";
-import notiActive from "../../assets/notiActive.svg";
-import shop from "../../assets/shop.svg";
-import shopActive from "../../assets/shopActive.svg";
+// import noti from "../../assets/noti.svg";
+// import notiActive from "../../assets/notiActive.svg";
+// import shop from "../../assets/shop.svg";
+// import shopActive from "../../assets/shopActive.svg";
 import EventSection from "../../components/main/event-card/EventCard";
 import Menu from "../../components/common/menu/Menu";
 import { useNavigate } from "react-router-dom";
@@ -18,11 +18,11 @@ const Main = () => {
   const isLoggedIn = authApi.isAuthenticated();
   //
 
-  const navigateToShop = () => { };
+  // const navigateToShop = () => { };
 
-  const navigateToNoti = () => {
-    navigate("/noti");
-  };
+  // const navigateToNoti = () => {
+  //   navigate("/noti");
+  // };
 
   // 로그인 버튼 핸들러 추가
   const handleLoginClick = () => {
@@ -87,12 +87,12 @@ const Main = () => {
   return (
     <>
       <MainHeader
-        leftIcon={shop}
-        leftIconActive={shopActive}
-        rightIcon={noti}
-        rightIconActive={notiActive}
-        onLeftClick={navigateToShop}
-        onRightClick={navigateToNoti}
+        // leftIcon={shop}
+        // leftIconActive={shopActive}
+        // rightIcon={noti}
+        // rightIconActive={notiActive}
+        // onLeftClick={navigateToShop}
+        // onRightClick={navigateToNoti}
       />
 
       <p className="greeting-ment bold">

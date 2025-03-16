@@ -24,7 +24,7 @@
 }
 
 .selectL:focus {
-  border-color: #7b68ee;
+  border-color: #0a84ff;
 }
 
 .selectLArrow-icon {
@@ -34,6 +34,7 @@
   transform: translateY(-50%);
   pointer-events: none;
   width: 12px;
+  background-color: #ffffff;
 }
 
 .selectLArrow-icon.default {

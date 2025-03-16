@@ -38,7 +38,7 @@ const RecipeRecommendation = () => {
       <Header
         leftIcon={backArrow}
         title="🍽️ 추천 레시피"
-        onLeftClick={() => navigate("/refrigeratormaincarousel")}
+        onLeftClick={() => navigate("/refrigerator")}
       />
       <div className="recipe-recommendation-container">
         <div className="recipe-grid">

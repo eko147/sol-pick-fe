@@ -39,7 +39,7 @@
 }
 
 .card-background.drop-zone-active {
-  box-shadow: 0 0 0 2px #7b68ee, 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0 2px #0a84ff, 0 4px 8px rgba(0, 0, 0, 0.2);
   transform: scale(1.02);
 }
 

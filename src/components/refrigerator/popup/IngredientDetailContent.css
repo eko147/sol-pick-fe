@@ -18,6 +18,7 @@
   font-size: 12px;
   line-height: 160%;
   letter-spacing: 0%;
+  margin-bottom: 0px;
 }
 
 .ingdetailArrow-icon {
@@ -30,7 +31,7 @@
   height: 150px;
   background-color: #d9d9d9;
   border-radius: 12px;
-  background-size: cover;
+  object-fit: cover;
 }
 
 .ingpopup-description {
@@ -44,6 +45,7 @@
   font-size: 14px;
   line-height: 160%;
   letter-spacing: 0%;
+  margin-bottom: 0px;
 }
 
 .ingpopup-description-expiration,
@@ -53,4 +55,5 @@
   font-size: 12px;
   line-height: 160%;
   letter-spacing: 0%;
+  margin-bottom: 0px;
 }

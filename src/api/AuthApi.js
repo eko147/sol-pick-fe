@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { BASE_URL } from '../config'; // src\config.js의 BASE_URL 설정 공유
 
-const BASE_URL = 'http://localhost:8090';
+// const BASE_URL = 'http://localhost:8090';
 
 export const authApi = {
     login: async (email, password) => {

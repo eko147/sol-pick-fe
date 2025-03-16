@@ -17,7 +17,7 @@ const CatGreetingPage = () => {
   const navigate = useNavigate();
 
   // 네비게이션 핸들러
-  const handleBack = () => navigate(-1);
+  const handleBack = () => navigate("/game/init");
   const handleClose = () => navigate("/card");
   const handleNext = () => navigate("/game/intro");
 

@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import NotiItem from "./NotiItem";
 import "./NotiList.css";
 
-const NotiList = ({ notifications = [] }) => {
+const NotiList = ({ notifications = [], onNotificationClick }) => {
   // 날짜별로 알림 그룹화
   const groupedNotifications = useMemo(() => {
     // 오늘, 어제 날짜 계산
@@ -10,7 +10,7 @@ const NotiList = ({ notifications = [] }) => {
     const yesterday = new Date(today);
     yesterday.setDate(yesterday.getDate() - 1);
 
-    // 날짜를 YYYY. MM. DD. 형식으로 변환하는 함수 (마침표 포함)
+    // 날짜를 YYYY. MM. DD. 형식으로 변환하는 함수
     function formatYMD(date) {
       const year = date.getFullYear();
       const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -25,47 +25,44 @@ const NotiList = ({ notifications = [] }) => {
     const groups = {};
 
     notifications.forEach((noti) => {
-      // 타임스탬프에서 날짜 부분만 올바르게 추출 (YYYY. MM. DD.)
-      const dateParts = noti.timestamp.split(" ");
-      // 이중 마침표를 방지하기 위해 마지막 마침표를 제거하고 다시 추가
-      const datePart = dateParts.slice(0, 3).join(" ").replace(/\.$/, "") + ".";
+      // ISO 문자열 날짜를 Date 객체로 변환
+      const date = new Date(noti.createdAt);
+
+      // 날짜 포맷팅
+      const dateString = formatYMD(date);
 
       // 표시용 날짜 결정
       let displayDate;
 
-      // "오늘", "어제" 정확한 문자열 비교
-      if (datePart === todayString) {
+      if (dateString === todayString) {
         displayDate = "오늘";
-      } else if (datePart === yesterdayString) {
+      } else if (dateString === yesterdayString) {
         displayDate = "어제";
       } else {
-        displayDate = datePart;
+        // YYYY. MM. DD. 형식으로 표시
+        displayDate = dateString;
       }
 
       // 그룹에 추가
       if (!groups[displayDate]) {
         groups[displayDate] = [];
       }
-      groups[displayDate].push(noti);
+
+      // 시간 포맷팅 (HH:MM)
+      const hours = String(date.getHours()).padStart(2, "0");
+      const minutes = String(date.getMinutes()).padStart(2, "0");
+      const timeString = `${hours}:${minutes}`;
+
+      groups[displayDate].push({
+        ...noti,
+        formattedTime: dateString + " " + timeString,
+      });
     });
 
     // 각 그룹 내에서 시간별로 알림 정렬 (최신순)
     for (const date in groups) {
       groups[date].sort((a, b) => {
-        // 시간 부분 추출 (HH:MM)
-        const timeA = a.timestamp.split(" ").pop();
-        const timeB = b.timestamp.split(" ").pop();
-
-        // 시간과 분을 숫자로 변환
-        const [hoursA, minutesA] = timeA.split(":").map(Number);
-        const [hoursB, minutesB] = timeB.split(":").map(Number);
-
-        // 시간 비교
-        if (hoursA !== hoursB) {
-          return hoursB - hoursA; // 시간 내림차순
-        }
-        // 분 비교
-        return minutesB - minutesA; // 분 내림차순
+        return new Date(b.createdAt) - new Date(a.createdAt);
       });
     }
 
@@ -98,15 +95,22 @@ const NotiList = ({ notifications = [] }) => {
       {groupedNotifications.map(([date, notis], groupIndex) => (
         <div key={date} className="noti-group">
           <div className="noti-date">{date}</div>
-          {notis.map((noti, index) => (
-            <NotiItem
-              key={noti.id || `${date}-${index}`}
-              type={noti.type}
-              title={noti.title}
-              description={noti.description}
-              timestamp={noti.timestamp}
-              showDate={false} // 이미 그룹 상단에 날짜가 표시되므로 개별 아이템엔 표시하지 않음
-            />
+          {notis.map((noti) => (
+            <div
+              key={noti.id}
+              className="noti-item-wrapper"
+              onClick={() => onNotificationClick && onNotificationClick(noti)}
+            >
+              <NotiItem
+                type={noti.type}
+                title={
+                  noti.type === "expiration" ? "유통기한 알림" : "재구매 알림"
+                }
+                description={noti.message}
+                timestamp={noti.formattedTime}
+                isRead={noti.isRead}
+              />
+            </div>
           ))}
         </div>
       ))}

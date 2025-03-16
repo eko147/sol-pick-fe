@@ -13,7 +13,7 @@
 }
 
 .buttonL-filled {
-  background-color: #7b68ee;
+  background-color: #0a84ff;
   color: #ffffff;
   border: none;
 }
@@ -24,8 +24,8 @@
 
 .buttonL-outlined {
   background-color: #ffffff;
-  color: #7b68ee;
-  border: 1px solid #7b68ee;
+  color: #0a84ff;
+  border: 1px solid #0a84ff;
 }
 
 /* .button-outlined:hover {

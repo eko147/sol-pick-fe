@@ -1,25 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./RecipeSelection.css";
-import RecipeCard from "./RecipeCard";
+import recipes from "./RecipeData";
+import {
+  saveSelectedRecipe,
+  getSelectedRecipe,
+} from "../../utils/game/storageUtils";
 
 const RecipeSelection = ({ onNext }) => {
-  // 레시피 배열 (실제로는 API로부터 받아올 수 있음)
-  const recipes = [
-    { id: 1, name: "레시피 1" },
-    { id: 2, name: "레시피 2" },
-    { id: 3, name: "레시피 3" },
-    { id: 4, name: "레시피 4" },
-    { id: 5, name: "레시피 5" },
-    { id: 6, name: "레시피 6" },
-  ];
-
   // 선택된 레시피 ID 상태
   const [selectedRecipeId, setSelectedRecipeId] = useState(null);
 
+  // 컴포넌트 마운트 시 기존에 저장된 레시피 ID 확인
+  useEffect(() => {
+    const savedRecipeId = getSelectedRecipe();
+    console.log("Initial selected recipe ID:", savedRecipeId);
+
+    if (savedRecipeId) {
+      setSelectedRecipeId(savedRecipeId);
+    }
+  }, []);
+
   // 레시피 선택 핸들러
   const handleSelectRecipe = (recipeId) => {
-    console.log("Selected recipe:", recipeId);
     setSelectedRecipeId(recipeId);
+    console.log("Selected recipe:", recipeId);
+  };
+
+  // 선택 완료 및 다음 단계로 이동
+  const handleContinue = () => {
+    if (selectedRecipeId) {
+      // 로컬 스토리지에 선택한 레시피 저장
+      saveSelectedRecipe(selectedRecipeId);
+      // 다음 단계로 이동
+      onNext();
+    }
   };
 
   return (
@@ -34,11 +48,28 @@ const RecipeSelection = ({ onNext }) => {
 
         <div className="recipe-grid">
           {recipes.map((recipe) => (
-            <RecipeCard
+            <div
               key={recipe.id}
-              selected={recipe.id === selectedRecipeId}
+              className={`recipe-card ${
+                recipe.id === selectedRecipeId ? "selected" : ""
+              }`}
               onClick={() => handleSelectRecipe(recipe.id)}
-            />
+            >
+              <img
+                src={recipe.imagePath}
+                alt={recipe.name}
+                className="recipe-image-selection"
+                onError={(e) => {
+                  console.error(
+                    `Failed to load image for recipe ${recipe.id}:`,
+                    recipe.imagePath
+                  );
+                  e.target.src =
+                    "https://via.placeholder.com/200x200?text=Image+Not+Found";
+                }}
+              />
+              <p className="recipe-name">{recipe.name}</p>
+            </div>
           ))}
         </div>
 
@@ -65,7 +96,7 @@ const RecipeSelection = ({ onNext }) => {
 
         <button
           className="recipe-continue-button"
-          onClick={onNext}
+          onClick={handleContinue}
           disabled={selectedRecipeId === null}
         >
           동의하고 시작하기

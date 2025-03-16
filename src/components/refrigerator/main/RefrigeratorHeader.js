@@ -2,12 +2,11 @@ import React from "react";
 import plus from "../../../assets/plus.svg";
 import detailArrow from "../../../assets/detailArrow.svg";
 import "./RefrigeratorHeader.css";
+import { useNavigate } from "react-router-dom";
 
-const RefrigeratorHeader = ({
-  totalIngredients,
-  onAddClick,
-  onDetailClick,
-}) => {
+const RefrigeratorHeader = ({ totalIngredients, onAddClick }) => {
+  const navigate = useNavigate();
+
   return (
     <header className="refrigerator-header-container">
       <div className="refrigerator-header">
@@ -20,7 +19,10 @@ const RefrigeratorHeader = ({
           </div>
         </div>
 
-        <div className="detail-section" onClick={onDetailClick}>
+        <div
+          className="detail-section"
+          onClick={() => navigate("/refrigerator/list")}
+        >
           <p className="total-quantity">총 {totalIngredients}개</p>
           <img
             src={detailArrow}

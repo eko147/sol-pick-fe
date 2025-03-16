@@ -9,8 +9,8 @@ const CatGreeting = ({ onNext }) => {
         <div className="cat-image-container">
           <img src={rainbowCat} alt="Rainbow Cat" className="rainbow-cat" />
         </div>
-        <div className="greeting-text">집사~ 나 왔다냥!</div>
-        <button className="start-button" onClick={onNext}>
+        <div className="greeting-text pixel-font-kr">집사~ 나 왔다냥!</div>
+        <button className="start-button pixel-font-kr" onClick={onNext}>
           캔따개 되기
         </button>
       </div>

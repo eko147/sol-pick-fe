@@ -68,8 +68,8 @@ input[type="checkbox"] {
 }
 
 input[type="checkbox"]:checked {
-  background-color: #7b68ee;
-  border-color: #7b68ee;
+  background-color: #0a84ff;
+  border-color: #0a84ff;
 }
 
 input[type="checkbox"]:checked::after {
@@ -87,7 +87,7 @@ input[type="checkbox"]:checked::after {
 /* 다음 버튼 스타일 */
 .terms.next-button {
   width: 100%;
-  background-color: #7b68ee;
+  background-color: #0a84ff;
   color: white;
   border: none;
   border-radius: 12px;
@@ -107,7 +107,7 @@ input[type="checkbox"]:checked::after {
 }
 
 .terms.next-button.active {
-  background-color: #7b68ee;
+  background-color: #0a84ff;
   cursor: pointer;
 }
 
@@ -162,8 +162,8 @@ input[type="checkbox"]:checked::after {
 }
 
 .age-button.selected {
-  border-color: #7b68ee;
-  color: #7b68ee;
+  border-color: #0a84ff;
+  color: #0a84ff;
   font-weight: bold;
 }
 

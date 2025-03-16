@@ -17,9 +17,9 @@ const GameIntroPage = () => {
   const navigate = useNavigate();
 
   // 네비게이션 핸들러
-  const handleBack = () => navigate(-1);
+  const handleBack = () => navigate("/game/greeting");
   const handleClose = () => navigate("/card");
-  const handleNext = () => navigate("/game/main");
+  const handleNext = () => navigate("/game/home");
 
   // 커스텀 헤더 스타일 정의
   const customHeaderStyle = {

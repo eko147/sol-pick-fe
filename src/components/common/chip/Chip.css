@@ -15,6 +15,8 @@
   flex-wrap: nowrap;
   padding: 8px 16px;
   gap: 8px;
+  height: 28px;
+  align-items: center;
 }
 
 .chip-item {
@@ -29,13 +31,14 @@
   transition: all 0.2s ease;
   line-height: 100%;
   letter-spacing: 0%;
+  align-items: center;
 }
 
 .chip-item.selected {
-  background-color: #7b68ee;
+  background-color: #0a84ff;
   color: #ffffff;
   font-weight: 700;
-  border: 1px solid #7b68ee;
+  border: 1px solid #0a84ff;
 }
 
 /* 버튼의 기본 스타일 제거 */

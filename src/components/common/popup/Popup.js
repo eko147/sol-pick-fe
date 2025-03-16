@@ -6,7 +6,8 @@ import "./Popup.css";
 const Popup = ({
   isOpen,
   onClose,
-  onConfirm,
+  onLeftClick,
+  onRightClick,
   title,
   description,
   outlinedButtonText,
@@ -50,13 +51,13 @@ const Popup = ({
               <ButtonS
                 text={outlinedButtonText}
                 variant="outlined"
-                onClick={onClose}
+                onClick={onLeftClick}
                 width="100%"
               />
               <ButtonS
                 text={filledButtonText}
                 variant="filled"
-                onClick={onConfirm}
+                onClick={onRightClick}
                 width="100%"
               />
             </div>

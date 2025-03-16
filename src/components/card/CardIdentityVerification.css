@@ -118,7 +118,7 @@
 .verification-request-button {
   height: 44px;
   padding: 0 16px;
-  background-color: #7b68ee;
+  background-color: #0a84ff;
   color: white;
   border: none;
   border-radius: 12px;
@@ -177,8 +177,8 @@
 }
 
 .checkbox-input:checked ~ .custom-checkbox {
-  background-color: #7b68ee;
-  border-color: #7b68ee;
+  background-color: #0a84ff;
+  border-color: #0a84ff;
 }
 
 .custom-checkbox:after {
@@ -210,7 +210,7 @@
 
 .verification.next-button {
   width: 100%;
-  background-color: #7b68ee;
+  background-color: #0a84ff;
   color: white;
   border: none;
   border-radius: 12px;

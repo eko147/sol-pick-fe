@@ -9,6 +9,8 @@ const Input = ({
   className,
   width = "343px",
   height = "36px",
+  value, // 추가: 제어 컴포넌트를 위한 value prop
+  onChange, // 추가: 제어 컴포넌트를 위한 onChange prop
 }) => {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const inputRef = useRef(null);
@@ -24,7 +26,7 @@ const Input = ({
         // 입력 필드의 오른쪽 20% 영역(대략 아이콘 위치)을 클릭했는지 확인
         if (e.clientX > rect.right - rect.width * 0.2) {
           setIsCalendarOpen(true);
-          input.style.borderColor = "#7b68ee";
+          input.style.borderColor = "#0A84FF";
         }
       };
 
@@ -60,7 +62,7 @@ const Input = ({
   const dateStyles =
     type === "date"
       ? {
-          "--focus-color": "#7b68ee",
+          "--focus-color": "#0A84FF",
         }
       : {};
 
@@ -72,6 +74,8 @@ const Input = ({
         placeholder={placeholder}
         name={name}
         id={id}
+        value={value} // 추가된 value prop 적용
+        onChange={onChange} // 추가된 onChange prop 적용
         className={`input ${className || ""} ${
           type === "date" ? "date-input" : ""
         } ${isCalendarOpen ? "date-input-active" : ""}`}

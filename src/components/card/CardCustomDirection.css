@@ -55,7 +55,7 @@
 }
 
 .card-option.selected {
-  border: 2px solid #7b68ee;
+  border: 2px solid #0a84ff;
   background-color: rgba(123, 104, 238, 0.05);
 }
 
@@ -85,7 +85,7 @@
 }
 
 .direction-selection-button {
-  background-color: #7b68ee;
+  background-color: #0a84ff;
   color: white;
   border: none;
   border-radius: 12px;

@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -50,8 +50,8 @@
 }
 
 .add-option:hover {
-  border: 1px solid #7b68ee;
-  background-color: #7b68ee0d; /* 배경색 살짝 변경 */
+  border: 1px solid #0a84ff;
+  background-color: #0a84ff0d; /* 배경색 살짝 변경 */
   transform: translateY(-2px); /* 살짝 위로 올라가는 효과 */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* 호버 시 그림자 추가 */
 }

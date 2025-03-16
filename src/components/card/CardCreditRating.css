@@ -95,9 +95,9 @@
 }
 
 .selection-button.selected {
-  border-color: #7b68ee;
+  border-color: #0a84ff;
   background-color: rgba(139, 122, 237, 0.05);
-  color: #7b68ee;
+  color: #0a84ff;
   font-weight: 600;
 }
 
@@ -142,8 +142,8 @@ input[type="checkbox"] {
 }
 
 input[type="checkbox"]:checked {
-  background-color: #7b68ee;
-  border-color: #7b68ee;
+  background-color: #0a84ff;
+  border-color: #0a84ff;
 }
 
 input[type="checkbox"]:checked::after {
@@ -187,7 +187,7 @@ input[type="checkbox"]:checked::after {
 /* 다음 버튼 */
 .rating.next-button {
   width: 100%;
-  background-color: #7b68ee;
+  background-color: #0a84ff;
   color: white;
   border: none;
   border-radius: 12px;
@@ -202,7 +202,7 @@ input[type="checkbox"]:checked::after {
 }
 
 .rating.next-button.enabled {
-  background-color: #7b68ee;
+  background-color: #0a84ff;
   color: white;
 }
 

@@ -111,6 +111,7 @@ import baguette from "../assets/ing/ing_baguette.svg";
 import pretzel from "../assets/ing/ing_pretzel.svg";
 import bagel from "../assets/ing/ing_bagel.svg";
 import sandwich from "../assets/ing/ing_sandwich.svg";
+import blowfish from "../assets/ing/ing_blowfish.svg";
 
 // 이모지와 이미지 매핑 객체
 export const EMOJI_TO_IMAGE_MAP = {
@@ -158,6 +159,7 @@ export const EMOJI_TO_IMAGE_MAP = {
   "🥓": bacon,
   "🐟": fish,
   "🐠": tropicalfish,
+  "🐡": blowfish,
   "🦐": shrimp,
   "🦀": crab,
   "🦞": lobster,

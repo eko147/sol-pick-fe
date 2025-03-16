@@ -4,10 +4,8 @@ import selectArrow from "../../../assets/selectArrow.svg";
 import selectArrowActive from "../../../assets/selectArrowActive.svg";
 
 const SelectL = ({
-  name,
-  id,
   options = [],
-  defaultValue = "",
+  value = "",
   onChange,
   width = "108px",
   height = "36px",
@@ -15,12 +13,10 @@ const SelectL = ({
 }) => {
   const selectRef = useRef(null);
 
-  // 옵션 선택 후 포커스 제거
   const handleChange = (e) => {
     if (onChange) {
       onChange(e);
     }
-
     selectRef.current.blur();
   };
 
@@ -28,10 +24,8 @@ const SelectL = ({
     <div className="selectL-container">
       <select
         ref={selectRef}
-        name={name}
-        id={id}
         onChange={handleChange}
-        defaultValue={defaultValue}
+        value={value}
         className={`selectL ${className || ""}`}
         style={{ width, height }}
       >
