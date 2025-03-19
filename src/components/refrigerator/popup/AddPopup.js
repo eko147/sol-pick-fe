@@ -4,10 +4,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import closeIcon from "../../../assets/close.svg";
 import ReceiptScanner from "../add/ReceiptScanner";
 import { useNavigate } from "react-router-dom";
+import ReactDOM from "react-dom";
 
 const AddPopup = ({ isOpen, onClose }) => {
   const [scannerOpen, setScannerOpen] = useState(false);
   const navigate = useNavigate();
+
+  if (!isOpen) return null;
 
   const handleReceiptScanClick = () => {
     setScannerOpen(true);
@@ -44,7 +47,7 @@ const AddPopup = ({ isOpen, onClose }) => {
     onClose();
   };
 
-  return (
+  return ReactDOM.createPortal(
     <>
       <AnimatePresence>
         {isOpen && !scannerOpen && (
@@ -115,7 +118,8 @@ const AddPopup = ({ isOpen, onClose }) => {
           />
         )}
       </AnimatePresence>
-    </>
+    </>,
+    document.getElementById("root")
   );
 };
 

@@ -5,8 +5,11 @@ import CardBackground3 from "../../assets/card/cardBackground3.svg";
 import CardBackground4 from "../../assets/card/cardBackground4.svg";
 import CardBackground5 from "../../assets/card/cardBackground5.svg";
 import { saveCardBackground } from "../../api/CardApi";
+import { useToast } from "../../context/ToastContext"; // Toast Context 불러오기
 
 const CardCustomBackground = ({ onNext }) => {
+  const { showToast } = useToast(); // Toast 함수 가져오기
+
   // 카드 디자인 옵션 데이터 - SVG 배경으로 변경
   const cardDesigns = [
     { id: 2, name: "디자인 2", backgroundImage: CardBackground2 },
@@ -43,7 +46,8 @@ const CardCustomBackground = ({ onNext }) => {
       onNext();
     } catch (error) {
       console.error("배경 저장 실패:", error);
-      alert("배경 저장에 실패했습니다. 다시 시도해주세요.");
+      // Alert를 Toast 메시지로 변경
+      showToast("배경 저장에 실패했습니다. 다시 시도해주세요.");
     } finally {
       setIsLoading(false);
     }

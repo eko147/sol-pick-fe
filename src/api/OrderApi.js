@@ -1,9 +1,7 @@
-// src/api/OrderApi.js
-import axios from "axios";
-import { authApi } from "./AuthApi";
-import { BASE_URL } from "../config"; // src\config.js의 BASE_URL 설정 공유
 
-// const BASE_URL = 'http://localhost:8090';
+import axios from 'axios';
+import { authApi } from './AuthApi';
+import { BASE_URL } from '../config';
 
 export const orderApi = {
   getOrderHistory: async () => {

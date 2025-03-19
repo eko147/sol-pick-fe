@@ -13,6 +13,7 @@ import {
   updateGameState,
   discoverIngredient,
   getSelectedRecipe,
+  getDiscoveredIngredients,
   resetGameData, // resetGameData API 함수 추가
 } from "../../api/GameApi";
 import recipes from "./RecipeData";
@@ -226,6 +227,8 @@ const GameMain = ({ onDailyGame, onStorage }) => {
     }
   };
 
+  // GameMain.js 파일의 exploreIngredients 함수 수정
+
   /**
    * 탐색하기 기능
    * 에너지를 소모하여 식재료 또는 사료 획득
@@ -293,8 +296,12 @@ const GameMain = ({ onDailyGame, onStorage }) => {
           // 레시피 선택이 안된 경우 사료 지급
           newGameState.food += 1;
 
-          await updateGameState(newGameState);
-          setGameState(newGameState);
+          const updatedState = await updateGameState(newGameState);
+          if (updatedState) {
+            setGameState(updatedState);
+          } else {
+            setGameState(newGameState);
+          }
 
           setModalConfig({
             isOpen: true,
@@ -307,29 +314,83 @@ const GameMain = ({ onDailyGame, onStorage }) => {
           return;
         }
 
-        // 랜덤하게 식재료 선택
-        const randomIngredientIndex = Math.floor(
-          Math.random() * selectedRecipe.ingredients.length
-        );
-        const randomIngredientName =
-          selectedRecipe.ingredients[randomIngredientIndex].name;
+        try {
+          // 현재 식재료 상태 가져오기
+          const ingredientsData = await getDiscoveredIngredients(
+            selectedRecipe.id
+          );
 
-        // 서버에 식재료 발견 처리 요청
-        const discoveryResult = await discoverIngredient(
-          selectedRecipe.id,
-          randomIngredientName
-        );
+          // 1. 미발견 식재료 필터링
+          const undiscoveredIngredients = ingredientsData.filter(
+            (ing) => !ing.discovered
+          );
 
-        // 디버깅 로그 추가
-        console.log("식재료 발견 결과:", discoveryResult);
+          // 2. 발견됐지만 필요 수량에 미달하는 식재료 필터링
+          const incompleteIngredients = ingredientsData.filter(
+            (ing) => ing.discovered && ing.count < ing.requiredQuantity
+          );
 
-        // discoveryResult에 ingredientName 추가 (API 응답에 포함되지 않은 경우)
-        if (!discoveryResult.ingredientName) {
-          discoveryResult.ingredientName = randomIngredientName;
-        }
+          // 3. 선택 가능한 식재료 결정
+          let targetIngredients;
+          let searchMessage = "";
 
-        // 발견 처리가 완료된 경우
-        if (discoveryResult) {
+          if (undiscoveredIngredients.length > 0) {
+            // 미발견 식재료가 있으면 우선 선택
+            targetIngredients = undiscoveredIngredients;
+            searchMessage = "아직 발견하지 못한 식재료를 찾고 있습니다...";
+          } else if (incompleteIngredients.length > 0) {
+            // 모든 식재료가 발견됐지만 수량이 부족한 식재료 선택
+            targetIngredients = incompleteIngredients;
+            searchMessage = "발견한 식재료의 수량을 채우고 있습니다...";
+          } else {
+            // 모든 식재료가 필요 수량을 충족한 경우
+            // 서버에 게임 상태만 업데이트하고 사료 지급
+            newGameState.food += 1;
+
+            const updatedState = await updateGameState(newGameState);
+            if (updatedState) {
+              setGameState(updatedState);
+            } else {
+              setGameState(newGameState);
+            }
+
+            setModalConfig({
+              isOpen: true,
+              title: "탐색 완료",
+              message:
+                "모든 식재료를 충분히 모았습니다! 사료 1개를 획득했습니다.",
+              buttons: [
+                { text: "확인", onClick: () => closeModal(), type: "primary" },
+              ],
+            });
+            return;
+          }
+
+          // 4. 선택 가능한 식재료 중 하나를 랜덤 선택
+          const randomIndex = Math.floor(
+            Math.random() * targetIngredients.length
+          );
+          const selectedIngredient = targetIngredients[randomIndex];
+
+          console.log(
+            `선택된 식재료: ${selectedIngredient.ingredientName}, 발견여부: ${selectedIngredient.discovered}, 현재수량: ${selectedIngredient.count}, 필요수량: ${selectedIngredient.requiredQuantity}`
+          );
+
+          // 5. 서버에 식재료 발견 처리 요청
+          const discoveryResult = await discoverIngredient(
+            selectedRecipe.id,
+            selectedIngredient.ingredientName,
+            selectedRecipe.points // 레시피 포인트 전달
+          );
+
+          // 디버깅 로그 추가
+          console.log("식재료 발견 결과:", discoveryResult);
+
+          // discoveryResult에 ingredientName 추가 (API 응답에 포함되지 않은 경우)
+          if (!discoveryResult.ingredientName) {
+            discoveryResult.ingredientName = selectedIngredient.ingredientName;
+          }
+
           // 게임 상태 업데이트 (ingredientsCount 증가)
           newGameState.ingredientsCount += 1;
 
@@ -341,27 +402,11 @@ const GameMain = ({ onDailyGame, onStorage }) => {
             setGameState(newGameState);
           }
 
-          // 디버깅: 레시피 완성 조건 로깅
-          console.log("레시피 완성 여부:", discoveryResult.isRecipeCompleted);
-          console.log("레시피 완성 확인:", {
-            isRecipeCompleted: discoveryResult.isRecipeCompleted,
-            discoveryResult,
-          });
-
-          // 레시피 완성 확인 - discoveryResult 객체 구조 디버깅
-          if (
-            discoveryResult.isRecipeCompleted === true ||
-            // API 응답이 Boolean 대신 문자열로 올 경우에도 대응
-            discoveryResult.isRecipeCompleted === "true" ||
-            // 레시피 완성이 완료되었다는 다른 지표가 있는지 확인
-            (discoveryResult.newCount >= discoveryResult.requiredQuantity &&
-              !discoveryResult.isNewlyDiscovered)
-          ) {
-            console.log("레시피 완성됨! 모달 표시");
-            // 현재 선택된 레시피에서 포인트 값 가져오기
+          // 결과 처리
+          if (discoveryResult.isRecipeCompleted) {
+            // 레시피 완성 성공 모달 표시
             const recipePoints = selectedRecipe.points || 5000;
 
-            // 레시피 완성 성공 모달 표시
             setModalConfig({
               isOpen: true,
               title: "레시피 완성!",
@@ -433,8 +478,9 @@ const GameMain = ({ onDailyGame, onStorage }) => {
               ],
             });
           }
-        } else {
-          // 발견 처리 실패 시 에너지, 경험치만 업데이트
+        } catch (error) {
+          console.error("식재료 발견 처리 중 오류 발생:", error);
+          // 오류 발생 시 에너지만 소모하고 메시지 표시
           const updatedState = await updateGameState(newGameState);
           if (updatedState) {
             setGameState(updatedState);
@@ -444,8 +490,8 @@ const GameMain = ({ onDailyGame, onStorage }) => {
 
           setModalConfig({
             isOpen: true,
-            title: "탐색 완료",
-            message: "아무것도 찾지 못했습니다.",
+            title: "오류 발생",
+            message: "식재료 발견 처리 중 오류가 발생했습니다.",
             buttons: [
               { text: "확인", onClick: () => closeModal(), type: "primary" },
             ],

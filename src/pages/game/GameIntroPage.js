@@ -17,7 +17,7 @@ const GameIntroPage = () => {
   const navigate = useNavigate();
 
   // 네비게이션 핸들러
-  const handleBack = () => navigate("/game/greeting");
+  const handleBack = () => navigate(-1);
   const handleClose = () => navigate("/card");
   const handleNext = () => navigate("/game/home");
 

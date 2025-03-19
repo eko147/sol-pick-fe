@@ -9,11 +9,14 @@ import home from "../../../assets/home.svg";
 import homeActive from "../../../assets/homeActive.svg";
 import mypage from "../../../assets/mypage.svg";
 import mypageActive from "../../../assets/mypageActive.svg";
+import { authApi } from "../../../api/AuthApi";
+import { useToast } from "../../../context/ToastContext";
 
 const Menu = () => {
   const [activeMenu, setActiveMenu] = useState("home");
   const navigate = useNavigate();
   const location = useLocation(); // 현재 URL 경로 가져오기
+  const { showToast } = useToast();
 
   const menuItems = [
     {
@@ -60,6 +63,14 @@ const Menu = () => {
   }, [location.pathname]);
 
   const handleMenuClick = (menuId) => {
+    // 탭을 클릭했을 때 로그인 여부 확인
+    const requiresAuth = ["refrigerator", "card"];
+    if (requiresAuth.includes(menuId) && !authApi.isAuthenticated()) {
+      showToast("먼저 로그인 해주세요.");
+      navigate("/login");
+      return;
+    }
+
     setActiveMenu(menuId);
     // 페이지 이동 작업
     const menuItem = menuItems.find((item) => item.id === menuId);

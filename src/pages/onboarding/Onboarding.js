@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./Onboarding.css";
 import igloo from "../../assets/logo/igloo.png";
+import refrigerator from "../../assets/logo/refrigerator.png";
 import { authApi } from "../../api/AuthApi";
 
 const Onboarding = () => {
@@ -38,6 +39,7 @@ const Onboarding = () => {
       <motion.img
         // <img
         src={igloo}
+        // src={refrigerator}
         alt="solpickLogo"
         className="solpick-logo"
         스프링
@@ -69,7 +71,7 @@ const Onboarding = () => {
         >
           <button
             onClick={() => navigate("/login")}
-            className="get-started-button bold"
+            className="get-started-button"
           >
             시작하기
           </button>

@@ -3,6 +3,8 @@ import "./CardCustomSticker.css";
 import CardCustomPreview from "./CardCustomPreview";
 import { stickers } from "./StickerData";
 import { saveCardStickers } from "../../api/CardApi";
+import { useToast } from "../../context/ToastContext"; // Toast Context 불러오기
+
 // 카드 배경 이미지 import
 import CardBackground1 from "../../assets/card/basicDesign.svg";
 import CardBackground2 from "../../assets/card/cardBackground2.svg";
@@ -11,6 +13,7 @@ import CardBackground4 from "../../assets/card/cardBackground4.svg";
 import CardBackground5 from "../../assets/card/cardBackground5.svg";
 
 const CardCustomSticker = ({ onNext }) => {
+  const { showToast } = useToast(); // Toast 함수 가져오기
   const [currentPage, setCurrentPage] = useState(0);
   const [selectedStickerId, setSelectedStickerId] = useState(null);
   const [placedStickers, setPlacedStickers] = useState([]);
@@ -152,7 +155,7 @@ const CardCustomSticker = ({ onNext }) => {
       onNext();
     } catch (error) {
       console.error("스티커 저장 실패:", error);
-      alert("스티커 저장에 실패했습니다. 다시 시도해주세요.");
+      showToast("스티커 저장에 실패했습니다. 다시 시도해주세요.");
     } finally {
       setIsLoading(false);
     }

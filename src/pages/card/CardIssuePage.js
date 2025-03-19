@@ -36,7 +36,7 @@ const CardIssuePage = () => {
         if (hasCard) {
           // 카드가 있으면 포인트 페이지로 이동
           console.log("카드가 있어 포인트 페이지로 이동합니다.");
-          navigate("/point");
+          navigate("/card/points");
         } else {
           // 카드가 없으면 현재 페이지(카드 발급 페이지) 표시
           console.log("카드가 없어 현재 페이지를 표시합니다.");

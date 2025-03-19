@@ -1,10 +1,9 @@
 import React from "react";
-import ButtonS from "../common/button/ButtonS";
 import "./PointSummary.css";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const PointSummary = ({ pointSummary }) => {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     if (!pointSummary) {
         return <div className="points-loading">포인트 정보를 불러오는 중...</div>;
@@ -16,21 +15,12 @@ const PointSummary = ({ pointSummary }) => {
     };
 
     // 게임 페이지로 이동
-    const navigateToGame = () => {
-        navigate("/game");
-    };
+    // const navigateToGame = () => {
+    //     navigate("/game");
+    // };
 
     return (
         <div className="points-summary-container">
-            {/* 게임 버튼 섹션 */}
-            <div className="card-buttons">
-                <ButtonS
-                    text="게임 하러가기"
-                    width="100%"
-                    height="40px"
-                    onClick={navigateToGame}
-                />
-            </div>
 
             {/* 포인트 정보 */}
             <div className="points-summary">

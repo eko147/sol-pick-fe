@@ -1,23 +1,42 @@
 .wrapper {
   width: 100%;
   max-width: 375px;
-  height: 100%;
-  min-height: 100vh;
+  height: 812px;
   margin: 0 auto;
-  padding: 0;
   box-sizing: border-box;
   position: relative;
   background-color: #ffffff;
-  /* 화면 경계 확인*/
-  /* border: 1px solid #000000; */
+  overflow-y: auto; /* 스크롤 가능하도록 */
+  /* 스크롤바 숨김 처리 */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
-/* 작은 모바일 화면 */
-/* @media (max-width: 374px) {
-  .wrapper {
-    padding: 0 10px;
+/* Chrome, Safari에서 스크롤바 숨김 */
+.wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+/* 노치 디자인 */
+.notch-overlay {
+  position: absolute;
+  /* top: 10px; */
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 4px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  z-index: 1001;
+  pointer-events: none;
+}
+
+@media (max-width: 375px) {
+  .notch-overlay {
+    display: none;
   }
-} */
+}
 
 /* 태블릿 이상 화면에서도 모바일 레이아웃 유지 */
 @media (min-width: 768px) {

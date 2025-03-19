@@ -14,12 +14,11 @@ import garlicIcon from "../../assets/ing/ing_garlic.svg";
 import cheeseIcon from "../../assets/ing/ing_cheese.svg";
 import baconIcon from "../../assets/ing/ing_bacon.svg";
 import eggIcon from "../../assets/ing/ing_egg.svg";
-// import seaweedIcon from "../../assets/ing/ing_seaweed.svg";
-// import kimchiIcon from "../../assets/ing/ing_kimchi.svg";
-// import porkIcon from "../../assets/ing/ing_pork.svg";
-// import tofuIcon from "../../assets/ing/ing_tofu.svg";
-// import greenOnionIcon from "../../assets/ing/ing_greenonion.svg";
+import porkIcon from "../../assets/ing/ing_pork.svg";
 import riceIcon from "../../assets/ing/ing_rice.svg";
+import kimchiIcon from "../../assets/ing/ing_kimchi.svg";
+// import seaweedIcon from "../../assets/ing/ing_seaweed.svg";
+// import tofuIcon from "../../assets/ing/ing_tofu.svg";
 
 // 레시피 데이터
 export const recipes = [
@@ -67,10 +66,10 @@ export const recipes = [
     imagePath: kimchiStew,
     points: 10000,
     ingredients: [
-      // { name: "김치", quantity: 3, icon: kimchiIcon },
-      // { name: "돼지고기", quantity: 2, icon: porkIcon },
+      { name: "김치", quantity: 3, icon: kimchiIcon },
+      { name: "돼지고기", quantity: 2, icon: porkIcon },
       // { name: "두부", quantity: 1, icon: tofuIcon },
-      // { name: "대파", quantity: 1, icon: greenOnionIcon },
+      { name: "양파", quantity: 1, icon: onionIcon },
       { name: "마늘", quantity: 1, icon: garlicIcon },
     ],
   },
@@ -81,8 +80,8 @@ export const recipes = [
     points: 12000,
     ingredients: [
       // { name: "두부", quantity: 2, icon: tofuIcon },
-      // { name: "돼지고기", quantity: 2, icon: porkIcon },
-      // { name: "대파", quantity: 1, icon: greenOnionIcon },
+      { name: "돼지고기", quantity: 2, icon: porkIcon },
+      { name: "양파", quantity: 1, icon: onionIcon },
       { name: "마늘", quantity: 1, icon: garlicIcon },
       { name: "밥", quantity: 2, icon: riceIcon },
     ],
@@ -95,7 +94,7 @@ export const recipes = [
     ingredients: [
       { name: "밥", quantity: 2, icon: riceIcon },
       { name: "계란", quantity: 2, icon: eggIcon },
-      // { name: "대파", quantity: 1, icon: greenOnionIcon },
+      { name: "양파", quantity: 1, icon: onionIcon },
     ],
   },
 ];

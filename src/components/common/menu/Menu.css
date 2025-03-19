@@ -1,19 +1,30 @@
 .menu-container {
-  position: fixed;
-  bottom: 0;
-  margin: 0 auto;
-  width: 100%;
-  max-width: 375px;
+  position: fixed; /* 뷰포트에 고정 */
+  bottom: calc((100vh - 812px) / 2);
+  left: 50%; /* 중앙 정렬 */
+  transform: translateX(-50%);
+  width: 375px; /* 모바일 너비 고정 */
   height: 88px;
   background-color: #ffffff;
-  justify-content: center;
   z-index: 998;
+  border-top: 1px solid #f0f0f0;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+/* 모바일 환경에서 메뉴 스타일 */
+@media (max-width: 375px) {
+  .menu-container {
+    width: 100%; /* 전체 너비로 확장 */
+    transform: none; /* 변환 제거 */
+    left: 0; /* 왼쪽에서 시작 */
+    border-radius: 0; /* 둥근 모서리 제거 */
+  }
 }
 
 .menu {
   width: 100%;
-  max-width: 375px;
-  height: 88px;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   padding: 0 16px;

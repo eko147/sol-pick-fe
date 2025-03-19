@@ -30,16 +30,13 @@ const MyPageContent = () => {
 
   // 로그아웃 핸들러
   const handleLogout = () => {
-    // 토스트 메시지 표시
+    // 먼저 로그아웃 처리
+    authApi.logout();
+
     showToast("로그아웃 되었습니다.");
 
-    // 메인 페이지로 이동
+    // 로그아웃 처리 후 메인 페이지로 이동
     navigate("/main");
-
-    // 페이지 이동이 시작된 후에 실제 로그아웃 처리
-    setTimeout(() => {
-      authApi.logout();
-    }, 100); // 짧은 지연으로 내비게이션이 먼저 처리되도록
   };
 
   // 각 메뉴 항목
@@ -48,13 +45,13 @@ const MyPageContent = () => {
       id: "favorites",
       title: "찜한 레시피",
       icon: "star",
-      path: "/favorites",
+      path: "/mypage/favorites",
     },
     {
       id: "order",
       title: "결제 내역",
       icon: "order",
-      path: "/orders",
+      path: "/mypage/orders",
     },
     {
       id: "user-info",
@@ -66,7 +63,7 @@ const MyPageContent = () => {
       id: "account",
       title: "알러지 정보",
       icon: "user",
-      path: "/account/settings",
+      path: "/mypage/allergy-management",
     },
   ];
 
@@ -93,12 +90,12 @@ const MyPageContent = () => {
             <ButtonS
               text="회원가입"
               variant="outlined"
-              width="80px"
+              width="88px"
               height="24px"
             />
             <ButtonS
               text="로그인"
-              width="80px"
+              width="88px"
               height="24px"
               onClick={handleLoginClick}
             />

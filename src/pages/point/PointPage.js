@@ -17,6 +17,11 @@ const PointPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // 게임 페이지로 이동하는 함수
+  const navigateToGame = () => {
+    navigate("/game");
+  };
+
   useEffect(() => {
     // 사용자 인증 확인
     if (!authApi.isAuthenticated()) {
@@ -29,7 +34,7 @@ const PointPage = () => {
   }, [navigate]);
 
   const loadPointData = async () => {
-    setLoading(true);
+    // setLoading(true);
     try {
       // 병렬로 데이터 가져오기
       const [cardInfoData, pointSummaryData, pointHistoryData] = await Promise.all([
@@ -51,9 +56,7 @@ const PointPage = () => {
 
   return (
     <div className="point-page-wrapper">
-      <Header
-        title="내 카드"
-      />
+      <Header title="내 카드" />
 
       <div className="point-page-container">
         {loading ? (
@@ -78,6 +81,10 @@ const PointPage = () => {
             </div>
           </>
         )}
+        {/* 게임 버튼 - 페이지 내부에 위치 */}
+        <button className="round-game-button" onClick={navigateToGame}>
+          🎮
+        </button>
       </div>
 
       <Menu />

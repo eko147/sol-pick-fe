@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CardIdentityVerification.css";
+import { useToast } from "../../context/ToastContext"; // Toast Context 불러오기
 
 const CardIdentityVerificationPage = () => {
   const navigate = useNavigate();
+  const { showToast } = useToast(); // Toast 함수 가져오기
+
   const [formData, setFormData] = useState({
     name: "",
     lastName: "",
@@ -31,8 +34,8 @@ const CardIdentityVerificationPage = () => {
       // 실제로는 여기서 인증 번호를 요청하는 API 호출
       setShowVerificationField(true);
     } else {
-      // 실제 구현에서는 Toast 메시지 등으로 사용자에게 알림
-      alert("휴대폰 번호를 입력해주세요.");
+      // Toast 메시지로 변경
+      showToast("휴대폰 번호를 입력해주세요.");
     }
   };
 
@@ -55,7 +58,8 @@ const CardIdentityVerificationPage = () => {
       localStorage.setItem("cardFirstName", formData.firstName);
       navigate("/card/apply/terms"); // 다음 단계(약관 동의)로 이동
     } else {
-      alert("모든 정보를 입력하고 약관에 동의해주세요.");
+      // Toast 메시지로 변경
+      showToast("모든 정보를 입력하고 약관에 동의해주세요.");
     }
   };
 

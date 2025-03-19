@@ -1,0 +1,133 @@
+.recipe-page-loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  height: calc(100vh - 100px); /* 헤더와 메뉴 높이 제외 */
+  /* background-color: #fff9f3; */
+  background-color: white;
+}
+
+.loading-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.cooking-tools {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  height: 150px;
+}
+
+.whisk,
+.spatula,
+.pot {
+  width: 60px;
+  height: 60px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.whisk {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff9e7d'%3E%3Cpath d='M4 17l3 3 1-1-3-3zm15-6l3-3a1 1 0 000-1l-3 3zM6.5 4.5L4 7l2 2 2.5-2.5-2-2zm9 9L14 16l2 2 2.5-2.5-2-2z'/%3E%3C/svg%3E");
+}
+
+.spatula {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%235a4a42'%3E%3Cpath d='M16 14l2 2 4-4-5-5-4 4 2 2-7 7a2 2 0 01-2.828 0l-1.172-1.172a2 2 0 010-2.828L11 7z'/%3E%3C/svg%3E");
+}
+
+.pot {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M20 7h-4V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2H4a1 1 0 00-1 1v3a4 4 0 004 4h1a5 5 0 005 5 5 5 0 005-5h1a4 4 0 004-4V8a1 1 0 00-1-1zm-9-2h4v2h-4V5z'/%3E%3C/svg%3E");
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-15deg);
+  }
+  75% {
+    transform: rotate(15deg);
+  }
+}
+
+.animate-whisk {
+  animation: wiggle 1s ease-in-out infinite;
+  animation-delay: 0s;
+}
+
+.animate-spatula {
+  animation: wiggle 1s ease-in-out infinite;
+  animation-delay: 0.3s;
+}
+
+.animate-pot {
+  animation: wiggle 1s ease-in-out infinite;
+  animation-delay: 0.6s;
+}
+
+.loading-text {
+  font-family: "DOSGothic", sans-serif;
+  font-size: 18px;
+  color: #5a4a42;
+  margin: 0;
+}
+
+.loading-subtext {
+  font-family: "EarlyFontDiary", sans-serif;
+  font-size: 14px;
+  color: #888;
+  margin: 0;
+}
+
+.loading-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.loading-gif {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.loading-text {
+  font-family: "DOSGothic", sans-serif;
+  font-size: 18px;
+  color: #5a4a42;
+  margin: 0;
+}
+
+.loading-subtext {
+  font-family: "EarlyFontDiary", sans-serif;
+  font-size: 14px;
+  color: #888;
+  margin: 0;
+}
+
+.recipe-page-loading,
+.recipe-page-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  font-size: 14px;
+  color: #969696;
+  padding-top: 50px; /* 헤더 아래에 표시되도록 패딩 추가 */
+}
+
+.recipe-page-error {
+  color: #ff6b6b;
+}

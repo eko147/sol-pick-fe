@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #fffcf9;
+  background-color: white;
   font-family: Arial, sans-serif;
   text-align: center;
 }
@@ -12,7 +12,7 @@
 .recipe-loading-container h2 {
   font-size: 24px;
   color: #ff7f50;
-  /* color: #0A84FF; */
+  /* color: #0a84ff; */
   margin-bottom: 10px;
 }
 

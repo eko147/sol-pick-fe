@@ -50,9 +50,9 @@ const Main = () => {
     ];
 
     const eveningGreetings = [
-      "노을지는 저녁이에요! 하루의 마무리를",
+      "노을지는 저녁이에요!",
       "포근한 저녁이에요! 남은 하루도",
-      "조용한 저녁이에요! 하루의 마무리를",
+      "조용한 저녁이에요!",
     ];
 
     const nightGreetings = [
@@ -240,12 +240,12 @@ const Main = () => {
             <ButtonS
               text="회원가입"
               variant="outlined"
-              width="80px"
+              width="88px"
               height="24px"
             />
             <ButtonS
               text="로그인"
-              width="80px"
+              width="88px"
               height="24px"
               onClick={() => navigate("/login")}
             />
@@ -257,7 +257,7 @@ const Main = () => {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.3 }}
-        onClick={() => navigate("/")} // 식단 추천 페이지로 이동
+        onClick={() => navigate("/survey-page")} // 식단 추천 페이지로 이동
       >
         <img src={mealplanner} alt="mealplanner" className="meal-planner" />
       </motion.div>
@@ -328,7 +328,7 @@ const Main = () => {
         />
       </motion.div>
 
-      <div style={{ height: "76px" }}></div>
+      <div style={{ height: "88px" }}></div>
 
       <Menu />
     </>

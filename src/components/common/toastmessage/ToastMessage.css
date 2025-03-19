@@ -9,7 +9,7 @@
   transition: opacity 1s ease-in-out;
   text-align: center;
   position: fixed;
-  bottom: 100px;
+  bottom: 188px;
   left: 50%;
   transform: translateX(-50%);
 }

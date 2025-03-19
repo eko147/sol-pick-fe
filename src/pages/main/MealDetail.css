@@ -1,0 +1,49 @@
+.meal-detail-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+
+  /* box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); */
+  text-align: left;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.meal-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.meal-calories {
+  font-size: 18px;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.ingredient-list,
+.cooking-steps {
+  list-style: none;
+  padding: 100;
+}
+
+.ingredient-list li,
+.cooking-steps li {
+  background: #f9f9f9;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.cooking-steps {
+  list-style-type: decimal;
+}

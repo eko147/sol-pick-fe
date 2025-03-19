@@ -4,6 +4,7 @@ import BasicDesignFront from "../../assets/card/basicDesign.svg";
 import BasicDesignBack from "../../assets/card/basicDesignBack.svg";
 import CustomBasicDesign from "../../assets/card/customBasicDesign.svg";
 import { saveCardBackground } from "../../api/CardApi";
+import { useToast } from "../../context/ToastContext"; // Toast Context 불러오기
 
 // 카드 디자인 타입 상수
 const CARD_VIEWS = {
@@ -14,6 +15,7 @@ const CARD_VIEWS = {
 
 const CardDesign = ({ onNext, onCustomize }) => {
   const cardRef = useRef(null);
+  const showToast = useToast();
 
   // 상태 관리
   const [cardView, setCardView] = useState(CARD_VIEWS.FRONT_BASIC);
@@ -150,7 +152,7 @@ const CardDesign = ({ onNext, onCustomize }) => {
       onNext();
     } catch (error) {
       console.error("기본 디자인 저장 실패:", error);
-      alert("디자인 저장에 실패했습니다.");
+      // showToast("디자인 저장에 실패했습니다.");
     }
   };
 

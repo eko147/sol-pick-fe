@@ -46,6 +46,21 @@ export const checkHasCard = async () => {
 export const saveCardBackground = {
   post: async (url, data) => {
     try {
+      // userId 유효성 검사 추가
+      if (!data.userId) {
+        // localStorage에서 사용자 정보 확인
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (user && user.memberId) {
+          data.userId = parseInt(user.memberId);
+          console.log("userId를 localStorage에서 가져옴:", data.userId);
+        } else {
+          console.error(
+            "userId가 없고 localStorage에도 사용자 정보가 없습니다."
+          );
+          throw new Error("userId가 필요합니다.");
+        }
+      }
+
       const response = await cardApiClient.post(url, data);
       return response.data;
     } catch (error) {
@@ -83,11 +98,22 @@ export const saveCardDesign = {
 // 카드 발급
 export const issueCard = async (userId, designId, lastName, firstName) => {
   try {
-    // 필수 파라미터 검증
+    // 1. localStorage에서 현재 로그인된 사용자 정보 가져오기
+    const userInfo = JSON.parse(localStorage.getItem("user"));
+
+    // 2. userId가 없으면 localStorage에서 가져온 정보 사용
+    if (!userId && userInfo && userInfo.memberId) {
+      userId = userInfo.memberId;
+      console.log("localStorage에서 userId 가져옴:", userId);
+    }
+
+    // 3. 여전히 userId가 없으면 오류 발생
     if (!userId) {
       console.error("카드 발급 실패: userId가 누락되었습니다.");
       throw new Error("userId가 누락되었습니다.");
     }
+
+    // 나머지 파라미터 검증
     if (!designId) {
       console.error("카드 발급 실패: designId가 누락되었습니다.");
       throw new Error("designId가 누락되었습니다.");
@@ -101,17 +127,22 @@ export const issueCard = async (userId, designId, lastName, firstName) => {
       throw new Error("firstName이 누락되었습니다.");
     }
 
+    // userId를 명시적으로 정수로 변환
+    const parsedUserId = parseInt(userId);
+
+    // 요청 데이터 로깅
     console.log("카드 발급 API 호출:", {
-      userId,
-      designId,
+      userId: parsedUserId,
+      designId: parseInt(designId),
       lastName,
       firstName,
     });
 
+    // 요청 보내기
     const response = await cardApiClient.post(
       "/solpick/api/card-design/issue-card",
       {
-        userId: parseInt(userId),
+        userId: parsedUserId,
         designId: parseInt(designId),
         lastName,
         firstName,
@@ -130,17 +161,21 @@ export const issueCard = async (userId, designId, lastName, firstName) => {
 export const getCardInfo = async (userId) => {
   try {
     if (!userId) {
-      console.error("카드 정보 조회 실패: 사용자 ID가 누락되었습니다.");
-      throw new Error("사용자 ID가 누락되었습니다.");
+      // localStorage에서 사용자 정보 확인 시도
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (user && user.memberId) {
+        userId = parseInt(user.memberId);
+        console.log("userId를 localStorage에서 가져옴:", userId);
+      } else {
+        console.error("카드 정보 조회 실패: 사용자 ID가 누락되었습니다.");
+        throw new Error("사용자 ID가 누락되었습니다.");
+      }
     }
 
-    console.log("카드 정보 조회 API 호출:", { userId });
     const response = await cardApiClient.get(
       `/solpick/api/card-design/card-info/${userId}`
     );
-    console.log("카드 정보 조회 API 응답:", response.data);
 
-    // 응답 데이터 확인 및 처리
     if (!response.data) {
       console.error("카드 정보 조회 실패: 응답 데이터가 없습니다.");
       throw new Error("카드 정보를 가져오는데 실패했습니다.");

@@ -5,11 +5,15 @@ import { Outlet } from "react-router-dom";
 const Layout = () => {
   return (
     <div className="layout">
-      {/* 헤더 컴포넌트 */}
-      <Wrapper>
-        <Outlet />
-      </Wrapper>
-      {/* 푸터 컴포넌트 */}
+      <div className="layout-container">
+        {/* 노치 디자인 */}
+        <div className="notch-overlay"></div>
+
+        {/* 콘텐츠 스크롤 영역 */}
+        <Wrapper>
+          <Outlet />
+        </Wrapper>
+      </div>
     </div>
   );
 };

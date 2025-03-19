@@ -58,20 +58,6 @@ function LoginForm({ onLoginSuccess }) {
         }
     };
 
-    // const handleForgotPassword = () => {
-    //     // 비밀번호 찾기 페이지로 이동
-    //     navigate('/forgot-password');
-    // };
-
-    // const handleSignup = () => {
-    //     // 회원가입 페이지로 이동
-    //     navigate('/signup');
-    // };
-
-
-
-
-
     return (
         <form className="login-form" onSubmit={handleLogin}>
             <div className="form-group">
@@ -101,7 +87,6 @@ function LoginForm({ onLoginSuccess }) {
             </div>
 
             {error && <p className="error-message">{error}</p>}
-
 
             <ButtonL
                 text={isLoading ? "로그인 중..." : "로그인"}

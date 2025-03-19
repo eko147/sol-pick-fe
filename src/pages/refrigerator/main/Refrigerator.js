@@ -19,7 +19,48 @@ const Refrigerator = () => {
   const [isAddPopupOpen, setIsAddPopupOpen] = useState(false);
   const [isDetailPopupOpen, setIsDetailPopupOpen] = useState(false);
   const [clickedIngredient, setClickedIngredient] = useState(null);
+  // 마우스 이벤트
+  const [mouseDown, setMouseDown] = useState(false);
+  // 터치(스와이프) 이벤트
+  const [touchStart, setTouchStart] = useState(null);
   const { showToast } = useToast();
+
+  // 터치/마우스 이벤트 핸들러
+  const handleSwipeStart = (clientX, e) => {
+    // 기본 스크롤 동작 방지
+    e.preventDefault();
+    setTouchStart(clientX);
+    setMouseDown(true);
+  };
+
+  const handleSwipeMove = (clientX, e) => {
+    // 기본 스크롤 동작 방지
+    e.preventDefault();
+
+    if (!mouseDown || touchStart === null) return;
+
+    const distance = touchStart - clientX;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe && currentPage < allIngredients.length - 1) {
+      setCurrentPage(currentPage + 1);
+      setTouchStart(null);
+      setMouseDown(false);
+    } else if (isRightSwipe && currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+      setTouchStart(null);
+      setMouseDown(false);
+    }
+  };
+
+  const handleSwipeEnd = (e) => {
+    // 기본 스크롤 동작 방지
+    e.preventDefault();
+
+    setTouchStart(null);
+    setMouseDown(false);
+  };
 
   // 식재료 로딩 상태
   const [loading, setLoading] = useState(true);
@@ -227,35 +268,6 @@ const Refrigerator = () => {
     setCurrentPage(pageIndex);
   };
 
-  // 스와이프 제스처를 위한 터치 처리
-  const [touchStart, setTouchStart] = useState(null);
-  const [touchEnd, setTouchEnd] = useState(null);
-
-  const handleTouchStart = (e) => {
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchMove = (e) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > 50;
-    const isRightSwipe = distance < -50;
-
-    if (isLeftSwipe && currentPage < allIngredients.length - 1) {
-      handlePageChange(currentPage + 1);
-    } else if (isRightSwipe && currentPage > 0) {
-      handlePageChange(currentPage - 1);
-    }
-
-    setTouchStart(null);
-    setTouchEnd(null);
-  };
-
   // 선반 위치 계산
   const shelfPositions = [113, 213, 313, 413, 513];
   const ingredientPositions = shelfPositions.map((pos) => pos - 58); // 높이 50px + 8px 간격
@@ -289,9 +301,17 @@ const Refrigerator = () => {
 
       <div
         className="refrigerator-container"
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
+        // 터치 이벤트
+        onTouchStart={(e) => handleSwipeStart(e.targetTouches[0].clientX, e)}
+        onTouchMove={(e) => handleSwipeMove(e.targetTouches[0].clientX, e)}
+        onTouchEnd={(e) => handleSwipeEnd(e)}
+        // 마우스 이벤트
+        onMouseDown={(e) => handleSwipeStart(e.clientX, e)}
+        onMouseMove={(e) => {
+          if (mouseDown) handleSwipeMove(e.clientX, e);
+        }}
+        onMouseUp={(e) => handleSwipeEnd(e)}
+        onMouseLeave={(e) => handleSwipeEnd(e)}
       >
         <div
           className="refrigerator-carousel"
@@ -389,10 +409,10 @@ const Refrigerator = () => {
 
       {/* 레시피 추천 페이지 이동 버튼 */}
       <div
-        className="recipe-button recipe-button-pulse"
-        onClick={() => navigate("/recipe-loading")}
+        className="recipe-recommend-button recipe-recommend-button-pulse"
+        onClick={() => navigate("/recipe-recommendation")}
       >
-        <img src={recipe} alt="recipe" className="recipe-icon" />
+        <img src={recipe} alt="recipe" className="recipe-recommend-icon" />
       </div>
 
       {/* 식재료 추가 팝업 */}

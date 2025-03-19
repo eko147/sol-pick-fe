@@ -210,10 +210,21 @@ const IngredientAddForm = () => {
   // 다음 식재료로 이동하는 함수
   const moveToNextIngredient = () => {
     // 부드럽게 스크롤을 맨 위로 이동
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    // 래퍼 내부의 스크롤 가능한 요소 선택
+    const wrapper = document.querySelector(".wrapper");
+
+    if (wrapper) {
+      wrapper.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    } else {
+      // 폴백으로 window 스크롤
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
 
     const nextIndex = currentIngredientIndex + 1;
 
