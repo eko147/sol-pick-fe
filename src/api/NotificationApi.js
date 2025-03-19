@@ -7,7 +7,7 @@ export const notificationApi = {
   getNotifications: async (memberId) => {
     try {
       const response = await axios.get(
-        `${BASE_URL}/solpick/noti/list/${memberId}`,
+        `${BASE_URL}/api/solpick/noti/list/${memberId}`,
         {
           headers: authApi.getAuthHeader(),
         }
@@ -24,7 +24,7 @@ export const notificationApi = {
     try {
       console.log(`API 호출: 알림 ID ${notificationId} 읽음 처리 시작`);
       const response = await axios.patch(
-        `${BASE_URL}/solpick/noti/${notificationId}/read`,
+        `${BASE_URL}/api/solpick/noti/${notificationId}/read`,
         {},
         {
           headers: authApi.getAuthHeader(),
@@ -64,7 +64,7 @@ export const notificationApi = {
   getUnreadCount: async (memberId) => {
     try {
       const response = await axios.get(
-        `${BASE_URL}/solpick/noti/count/unread/${memberId}`,
+        `${BASE_URL}/api/solpick/noti/count/unread/${memberId}`,
         {
           headers: authApi.getAuthHeader(),
         }

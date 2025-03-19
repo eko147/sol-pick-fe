@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./CardDetail.css";
 
 import detailArrow from "../../assets/detailArrow.svg";
+import BasicDesignFront from "../../assets/card/basicDesign.svg";
 
 const CardDetail = ({ cardData, onNext }) => {
   const { cardName, cardSubName, benefits } = cardData;
@@ -20,14 +21,12 @@ const CardDetail = ({ cardData, onNext }) => {
         {/* 카드 이미지 */}
         <div className="card-visual-section">
           <div className="card-image-container">
-            <div className="card-image">
-              <svg
-                width="100"
-                height="100"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              ></svg>
+            <div className="detail-card-image">
+              <img
+                src={BasicDesignFront}
+                alt="Basic Design Front"
+                className="basic-design-front"
+              />
             </div>
           </div>
 

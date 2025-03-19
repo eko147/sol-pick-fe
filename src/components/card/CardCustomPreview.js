@@ -17,6 +17,7 @@ const CardCustomPreview = forwardRef((props, ref) => {
     isDraggingFromPalette,
     draggedStickerTypeId,
     generateId,
+    backgroundImage, // 배경 이미지 prop 추가
   } = props;
 
   const [draggingStickerId, setDraggingStickerId] = useState(null);
@@ -192,32 +193,13 @@ const CardCustomPreview = forwardRef((props, ref) => {
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
         >
-          <svg
+          {/* 기존 SVG 코드를 제거하고 import한 SVG 이미지로 교체 */}
+          <img
+            src={backgroundImage}
+            alt="Card Background"
             width="100%"
             height="100%"
-            viewBox="0 0 300 180"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <defs>
-              <linearGradient
-                id="cardGradient"
-                x1="0%"
-                y1="0%"
-                x2="100%"
-                y2="100%"
-              >
-                <stop offset="0%" stopColor="#f6f6ff" />
-                <stop offset="100%" stopColor="#e6e6ff" />
-              </linearGradient>
-            </defs>
-            <rect
-              width="100%"
-              height="100%"
-              rx="12"
-              ry="12"
-              fill="url(#cardGradient)"
-            />
-          </svg>
+          />
 
           {/* 선택된 모든 스티커 표시 */}
           {selectedStickers.map((sticker) => {

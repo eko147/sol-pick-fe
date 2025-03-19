@@ -27,6 +27,7 @@ export const recipes = [
     id: 1,
     name: "볼로네제파스타",
     imagePath: bolognese,
+    points: 13000,
     ingredients: [
       { name: "스파게티면", quantity: 2, icon: spaghettiIcon },
       { name: "소고기", quantity: 3, icon: beefIcon },
@@ -41,6 +42,7 @@ export const recipes = [
     id: 2,
     name: "까르보나라",
     imagePath: carbonara,
+    points: 11000,
     ingredients: [
       { name: "스파게티면", quantity: 2, icon: spaghettiIcon },
       { name: "베이컨", quantity: 3, icon: baconIcon },
@@ -52,6 +54,7 @@ export const recipes = [
     id: 3,
     name: "미역국",
     imagePath: seaweedSoup,
+    points: 10000,
     ingredients: [
       // { name: "미역", quantity: 2, icon: seaweedIcon },
       { name: "소고기", quantity: 2, icon: beefIcon },
@@ -62,6 +65,7 @@ export const recipes = [
     id: 4,
     name: "김치찌개",
     imagePath: kimchiStew,
+    points: 10000,
     ingredients: [
       // { name: "김치", quantity: 3, icon: kimchiIcon },
       // { name: "돼지고기", quantity: 2, icon: porkIcon },
@@ -74,6 +78,7 @@ export const recipes = [
     id: 5,
     name: "마파두부덮밥",
     imagePath: mapoDofuRice,
+    points: 12000,
     ingredients: [
       // { name: "두부", quantity: 2, icon: tofuIcon },
       // { name: "돼지고기", quantity: 2, icon: porkIcon },
@@ -86,6 +91,7 @@ export const recipes = [
     id: 6,
     name: "계란볶음밥",
     imagePath: eggFriedRice,
+    points: 9500,
     ingredients: [
       { name: "밥", quantity: 2, icon: riceIcon },
       { name: "계란", quantity: 2, icon: eggIcon },

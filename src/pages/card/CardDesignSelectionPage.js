@@ -20,7 +20,7 @@ const CardDesignSelectionPage = () => {
   const handleBack = () => navigate(-1);
   const handleClose = () => navigate("/card");
   const handleNext = () => navigate("/card/apply/identity-verification");
-  const handleGoToCustomize = () => navigate("/card/apply/custom/direction");
+  const handleGoToCustomize = () => navigate("/card/apply/custom/background");
 
   return (
     <div className="card-design-selection-page-container">

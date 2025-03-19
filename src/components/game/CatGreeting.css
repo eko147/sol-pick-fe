@@ -42,7 +42,7 @@
   font-family: "Noto Sans KR", sans-serif;
 }
 
-.start-button {
+.greeting-start-button {
   background-color: #f9b13c;
   color: white;
   border: none;
@@ -58,12 +58,12 @@
   max-width: 300px;
 }
 
-.start-button:hover {
+.greeting-start-button:hover {
   background-color: #e9a22b;
   transform: translateY(-2px);
 }
 
-.start-button:active {
+.greeting-start-button:active {
   transform: translateY(1px);
 }
 

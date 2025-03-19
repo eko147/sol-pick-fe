@@ -30,8 +30,6 @@ const CardIdentityVerificationPage = () => {
     if (formData.phoneNumber) {
       // 실제로는 여기서 인증 번호를 요청하는 API 호출
       setShowVerificationField(true);
-      // 실제 구현에서는 여기서 SMS 인증 요청 API를 호출합니다
-      console.log("인증번호 요청:", formData.phoneNumber);
     } else {
       // 실제 구현에서는 Toast 메시지 등으로 사용자에게 알림
       alert("휴대폰 번호를 입력해주세요.");
@@ -52,11 +50,11 @@ const CardIdentityVerificationPage = () => {
       formData.verificationCode;
 
     if (isFormComplete && agreeToTerms) {
-      // 실제로는 여기서 인증 번호를 검증하는 API 호출
-      console.log("인증 완료 처리:", formData);
+      // 영문 성, 이름 저장
+      localStorage.setItem("cardLastName", formData.lastName);
+      localStorage.setItem("cardFirstName", formData.firstName);
       navigate("/card/apply/terms"); // 다음 단계(약관 동의)로 이동
     } else {
-      // 실제 구현에서는 더 구체적인 피드백 제공
       alert("모든 정보를 입력하고 약관에 동의해주세요.");
     }
   };

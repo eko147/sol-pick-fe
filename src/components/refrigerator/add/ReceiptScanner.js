@@ -5,15 +5,14 @@ import closeIcon from "../../../assets/close.svg";
 import noResult from "../../../assets/noResult.svg";
 import cameraIcon from "../../../assets/camera.svg";
 import ButtonS from "../../common/button/ButtonS";
-import ToastMessage from "../../../components/common/toastmessage/ToastMessage";
 import { ingredientApi } from "../../../api/IngredientApi";
 import { USE_MOCK_DATA } from "../../../config";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "../../../context/ToastContext";
 
 const ReceiptScanner = ({ isOpen, onClose, onScanComplete }) => {
   const navigate = useNavigate();
-  const [showToast, setShowToast] = useState(false);
-  const [toastMessage, setToastMessage] = useState("");
+  const { showToast } = useToast();
 
   const [stage, setStage] = useState("camera"); // camera, loading, noIngredients
   const [capturedImage, setCapturedImage] = useState(null);
@@ -49,8 +48,7 @@ const ReceiptScanner = ({ isOpen, onClose, onScanComplete }) => {
       streamRef.current = stream;
     } catch (err) {
       console.error("카메라 접근 오류:", err);
-      setToastMessage("카메라에 접근할 수 없습니다.");
-      setShowToast(true);
+      showToast("카메라에 접근할 수 없습니다.");
     }
   };
 
@@ -144,14 +142,14 @@ const ReceiptScanner = ({ isOpen, onClose, onScanComplete }) => {
           setStage("noIngredients");
         }
       } else {
-        setToastMessage("영수증 인식에 실패했습니다. 다시 시도해주세요.");
-        setShowToast(true);
+        showToast("영수증 인식에 실패했습니다. 다시 시도해주세요.");
+
         retakePhoto();
       }
     } catch (error) {
       console.error("OCR 처리 오류:", error);
-      setToastMessage("영수증 처리 중 오류가 발생했습니다.");
-      setShowToast(true);
+      showToast("영수증 처리 중 오류가 발생했습니다.");
+
       retakePhoto();
     }
   };
@@ -281,8 +279,6 @@ const ReceiptScanner = ({ isOpen, onClose, onScanComplete }) => {
           </div>
         )}
       </div>
-
-      {showToast && <ToastMessage message={toastMessage} duration={3000} />}
     </motion.div>
   );
 };

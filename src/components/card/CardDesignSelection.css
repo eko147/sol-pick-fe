@@ -38,44 +38,23 @@
 }
 
 /* 카드 이미지 스타일 */
-.card-image {
-  width: 190px;
-  height: 300px;
-  border-radius: 16px;
-  position: relative;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+.select-card-image {
+  width: 300px;
+  height: 180px;
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  margin-bottom: 20px;
-  transition: transform 0.3s;
-  transform-style: preserve-3d;
-  perspective: 1000px;
-}
-
-/* 카드 뒤집기 애니메이션 */
-.card-image.flipping {
-  transform: rotateY(180deg);
+  padding: 20px 0;
 }
 
 /* 기본 카드 앞면 */
-.card-image.frontBasic {
-  background: linear-gradient(to bottom, #ffcccc, #ffffff);
+.select-card-image.frontBasic {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
 }
-
-/* 기본 카드 뒷면 */
-.card-image.backBasic {
-  background: linear-gradient(to bottom, #f0f0f0, #dddddd);
-  transform: rotateY(180deg);
-}
-
 /* 커스텀 카드 */
-.card-image.frontCustom {
-  background: linear-gradient(to bottom, #c4e0ff, #ffffff);
+.select-card-image.frontCustom {
   position: relative;
 }
 
@@ -153,7 +132,7 @@
 }
 
 .custom-design-button:hover {
-  background-color: #5b4bc4;
+  background-color: #0a84ff;
 }
 
 /* 다음 버튼 */
@@ -172,11 +151,15 @@
 }
 
 .design.next-button:hover {
-  background-color: #5b4bc4;
+  background-color: #0a84ff;
 }
 
 .blank-container {
   border: none;
   padding: 0 50px;
   margin: auto auto 120px;
+}
+
+.custom-basic-card-image {
+  width: 100%;
 }

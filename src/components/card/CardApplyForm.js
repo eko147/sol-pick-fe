@@ -92,7 +92,7 @@ const CardApplyForm = ({ onNext }) => {
         </div>
 
         {/* 카드 수령 장소 */}
-        <div className="form-group">
+        <div className="apply-form-group">
           <label>카드 받을 곳</label>
           <div className="select-wrapper">
             <select
@@ -107,7 +107,7 @@ const CardApplyForm = ({ onNext }) => {
         </div>
 
         {/* 명세서 수령 방법 */}
-        <div className="form-group">
+        <div className="apply-form-group">
           <label>명세서 받는 방법</label>
           <div className="select-wrapper">
             <select
@@ -123,13 +123,13 @@ const CardApplyForm = ({ onNext }) => {
         </div>
 
         {/* 집 주소 */}
-        <div className="form-group">
+        <div className="apply-form-group">
           <label>집주소</label>
           <div className="address-input-container">
             <div className="address-search-input">
               <input
                 type="text"
-                className="form-input"
+                className="apply-form-input"
                 name="homeAddress"
                 value={formData.homeAddress}
                 placeholder="주소 검색"
@@ -151,7 +151,7 @@ const CardApplyForm = ({ onNext }) => {
             </div>
             <input
               type="text"
-              className="form-input address-detail-input"
+              className="apply-form-input address-detail-input"
               name="homeAddressDetail"
               value={formData.homeAddressDetail}
               onChange={handleInputChange}
@@ -161,13 +161,13 @@ const CardApplyForm = ({ onNext }) => {
         </div>
 
         {/* 직장 주소 */}
-        <div className="form-group">
+        <div className="apply-form-group">
           <label>직장주소</label>
           <div className="address-input-container">
             <div className="address-search-input">
               <input
                 type="text"
-                className="form-input"
+                className="apply-form-input"
                 name="workAddress"
                 value={formData.workAddress}
                 placeholder="주소 검색"
@@ -189,7 +189,7 @@ const CardApplyForm = ({ onNext }) => {
             </div>
             <input
               type="text"
-              className="form-input address-detail-input"
+              className="apply-form-input address-detail-input"
               name="workAddressDetail"
               value={formData.workAddressDetail}
               onChange={handleInputChange}
@@ -199,11 +199,11 @@ const CardApplyForm = ({ onNext }) => {
         </div>
 
         {/* 직장 정보 */}
-        <div className="form-group">
+        <div className="apply-form-group">
           <label>직장명</label>
           <input
             type="text"
-            className="form-input"
+            className="apply-form-input"
             name="companyName"
             value={formData.companyName}
             onChange={handleInputChange}
@@ -211,11 +211,11 @@ const CardApplyForm = ({ onNext }) => {
           />
         </div>
 
-        <div className="form-group">
+        <div className="apply-form-group">
           <label>부서명(선택)</label>
           <input
             type="text"
-            className="form-input"
+            className="apply-form-input"
             name="department"
             value={formData.department}
             onChange={handleInputChange}
@@ -223,11 +223,11 @@ const CardApplyForm = ({ onNext }) => {
           />
         </div>
 
-        <div className="form-group">
+        <div className="apply-form-group">
           <label>직장전화(선택)</label>
           <input
             type="text"
-            className="form-input"
+            className="apply-form-input"
             name="workPhone"
             value={formData.workPhone}
             onChange={handleInputChange}

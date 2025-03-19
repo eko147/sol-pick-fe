@@ -112,7 +112,7 @@ input[type="checkbox"]:checked::after {
 }
 
 .terms.next-button.active:hover {
-  background-color: #5b4bc4;
+  background-color: #486eff;
 }
 
 /* 태그 스타일 */

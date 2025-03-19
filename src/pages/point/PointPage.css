@@ -1,0 +1,57 @@
+.point-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f9fafb;
+}
+
+.point-page-container {
+  flex: 1;
+  padding: 0;
+  margin-bottom: 80px; /* 메뉴바 높이만큼 여백 */
+  background-color: #f9fafb;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; /* 스크롤 가능하도록 설정 */
+  height: calc(100vh - 60px - 80px); /* 헤더(60px)와 메뉴바(80px) 높이 제외 */
+  max-height: calc(100vh - 60px - 80px); /* 최대 높이 설정 */
+}
+
+/* 스크롤 가능한 내역 섹션 */
+.point-history-section {
+  margin-top: 16px;
+  flex: 1;
+  overflow-y: auto; /* 이 섹션 내에서만 스크롤 가능하도록 */
+  display: flex;
+  flex-direction: column;
+}
+
+.point-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.point-history-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+.loading-text,
+.error-message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 16px;
+  padding: 0 24px;
+}
+
+.error-message p {
+  margin: 4px 0;
+}

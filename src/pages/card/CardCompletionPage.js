@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CardCompletionPage.css";
 
@@ -14,6 +14,21 @@ const CardCompletionPage = () => {
 
   // 네비게이션 핸들러
   const handleConfirm = () => navigate("/main");
+
+  // 페이지 로드 시 필수 데이터 확인
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    const designId = localStorage.getItem("cardDesignId");
+    const lastName = localStorage.getItem("cardLastName");
+    const firstName = localStorage.getItem("cardFirstName");
+
+    console.log("CardCompletionPage - 필수 데이터 확인:", {
+      userId: localStorage.getItem("userId"),
+      designId: localStorage.getItem("cardDesignId"),
+      lastName: localStorage.getItem("cardLastName"),
+      firstName: localStorage.getItem("cardFirstName"),
+    });
+  }, []);
 
   return (
     <div className="card-completion-page-container">

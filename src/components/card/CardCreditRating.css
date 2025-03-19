@@ -207,7 +207,7 @@ input[type="checkbox"]:checked::after {
 }
 
 .rating.next-button.enabled:hover {
-  background-color: #5b4bc4;
+  background-color: #486eff;
 }
 
 .rating.next-button.disabled {

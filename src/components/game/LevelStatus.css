@@ -27,7 +27,7 @@
   margin: 10px;
 }
 
-.recipe-image {
+.home-recipe-image {
   width: 80px;
   height: 80px;
   border: 4px solid #944c4c;
@@ -41,7 +41,7 @@
   justify-content: center;
 }
 
-.recipe-img {
+.home-recipe-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -49,7 +49,7 @@
 }
 
 /* 캐릭터 이미지 내부 패턴 */
-.recipe-image::after {
+.home-recipe-image::after {
   content: "";
   position: absolute;
   top: 0;
@@ -190,7 +190,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 4px 8px;
+  padding: 2px 5px;
   /* 픽셀 스타일 구분선 */
   border-right: 2px dotted rgba(146, 76, 76, 0.2);
 }

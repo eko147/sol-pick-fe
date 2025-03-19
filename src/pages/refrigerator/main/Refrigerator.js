@@ -11,7 +11,7 @@ import { getIngredientImageFromEmoji } from "../../../utils/emojiToImageMap";
 import MainHeader from "../../../components/common/header/MainHeader";
 import recipe from "../../../assets/recipe.svg";
 import { ingredientApi } from "../../../api/IngredientApi";
-import ToastMessage from "../../../components/common/toastmessage/ToastMessage";
+import { useToast } from "../../../context/ToastContext";
 
 const Refrigerator = () => {
   const navigate = useNavigate();
@@ -19,15 +19,14 @@ const Refrigerator = () => {
   const [isAddPopupOpen, setIsAddPopupOpen] = useState(false);
   const [isDetailPopupOpen, setIsDetailPopupOpen] = useState(false);
   const [clickedIngredient, setClickedIngredient] = useState(null);
-  const [showToast, setShowToast] = useState(false);
-  const [toastMessage, setToastMessage] = useState("");
+  const { showToast } = useToast();
 
   // 식재료 로딩 상태
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   // 실제 식재료 데이터
-  const [allIngredients, setAllIngredients] = useState([]);
+  const [allIngredients, setAllIngredients] = useState([[]]);
 
   // 한 냉장고에 표시할 최대 식재료 수
   const MAX_INGREDIENTS_PER_REFRIGERATOR = 15;
@@ -50,14 +49,18 @@ const Refrigerator = () => {
         setAllIngredients(formattedIngredients);
       } else {
         setError(response.error || "식재료 목록을 불러오는데 실패했습니다.");
-        setToastMessage("식재료 목록을 불러오는데 실패했습니다.");
-        setShowToast(true);
+        showToast("식재료 목록을 불러오는데 실패했습니다.");
+
+        // 빈 냉장고 배열 설정 (에러 상태에서도 냉장고는 표시)
+        setAllIngredients([[]]);
       }
     } catch (error) {
       console.error("식재료 목록 조회 오류:", error);
       setError("서버 연결에 실패했습니다.");
-      setToastMessage("서버 연결에 실패했습니다.");
-      setShowToast(true);
+      showToast("서버 연결에 실패했습니다.");
+
+      // 빈 냉장고 배열 설정 (에러 상태에서도 냉장고는 표시)
+      setAllIngredients([[]]);
     } finally {
       setLoading(false);
     }
@@ -197,22 +200,19 @@ const Refrigerator = () => {
         setClickedIngredient(null);
 
         // 토스트 메시지 표시
-        setToastMessage("식재료가 삭제되었습니다.");
-        setShowToast(true);
+        showToast("식재료가 삭제되었습니다.");
       } else {
         // 삭제 실패 처리
         console.error("식재료 삭제 실패:", response.error);
 
         // 실패 메시지 표시
-        setToastMessage(response.error || "삭제에 실패했습니다.");
-        setShowToast(true);
+        showToast(response.error || "삭제에 실패했습니다.");
       }
     } catch (error) {
       console.error("식재료 삭제 중 오류:", error);
 
       // 오류 메시지 표시
-      setToastMessage("서버 연결에 실패했습니다.");
-      setShowToast(true);
+      showToast("서버 연결에 실패했습니다.");
     }
   };
 
@@ -303,22 +303,29 @@ const Refrigerator = () => {
               className="refrigerator-slide"
             >
               <div className="refrigerator-with-ingredients">
-                {/* 냉장고 SVG */}
+                {/* 냉장고 SVG (항상 표시) */}
                 <img
                   src={refrigeratorIllust}
                   alt="refrigeratorIllust"
                   className="refrigerator-svg"
                 />
 
+                {/* 냉장고 위에 오버레이 */}
                 {loading ? (
-                  <div className="refrigerator-loading">
-                    식재료 목록을 불러오는 중...
+                  <div className="refrigerator-status-overlay">
+                    <div className="refrigerator-status-message">
+                      식재료 목록을 불러오는 중...
+                    </div>
                   </div>
                 ) : error ? (
-                  <div className="refrigerator-error">{error}</div>
+                  <div className="refrigerator-status-overlay">
+                    <div className="refrigerator-status-message">{error}</div>
+                  </div>
                 ) : refrigeratorIngredients.length === 0 ? (
-                  <div className="refrigerator-empty">
-                    등록된 식재료가 없습니다.
+                  <div className="refrigerator-status-overlay">
+                    <div className="refrigerator-status-message">
+                      등록된 식재료가 없습니다.
+                    </div>
                   </div>
                 ) : (
                   /* 선반 위 식재료들 */
@@ -417,9 +424,6 @@ const Refrigerator = () => {
         outlinedButtonText="취소"
         filledButtonText="삭제하기"
       />
-
-      {showToast && <ToastMessage message={toastMessage} duration={3000} />}
-
       <Menu />
     </div>
   );

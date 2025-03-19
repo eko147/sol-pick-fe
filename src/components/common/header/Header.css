@@ -10,7 +10,7 @@
   height: 56px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   padding: 0 24px;
   background-color: white;
   position: relative;

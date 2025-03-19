@@ -59,7 +59,6 @@
 
 .card-bg-option.selected {
   border: 2px solid #0a84ff;
-  background-color: rgba(123, 104, 238, 0.05);
 }
 
 .bg-card-preview {
@@ -73,23 +72,6 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
-}
-
-/* 그라데이션 배경 스타일 */
-.gradient-blue {
-  background: linear-gradient(135deg, #64b5f6, #1976d2);
-}
-
-.gradient-purple {
-  background: linear-gradient(135deg, #b39ddb, #673ab7);
-}
-
-.gradient-pink {
-  background: linear-gradient(135deg, #f48fb1, #d81b60);
-}
-
-.gradient-green {
-  background: linear-gradient(135deg, #81c784, #388e3c);
 }
 
 /* 선택 버튼 */
@@ -109,7 +91,7 @@
   cursor: pointer;
   transition: background-color 0.3s;
   width: 100%;
-  margin: 80px auto 120px;
+  margin: 50px auto;
 }
 
 .background-selection-button:disabled {
@@ -118,5 +100,5 @@
 }
 
 .background-selection-button:hover:not(:disabled) {
-  background-color: #5b4bc4;
+  background-color: #486eff;
 }

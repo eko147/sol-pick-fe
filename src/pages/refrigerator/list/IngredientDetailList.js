@@ -9,7 +9,7 @@ import Popup from "../../../components/common/popup/Popup";
 import IngredientDetailContent from "../../../components/refrigerator/popup/IngredientDetailContent";
 import { ingredientApi } from "../../../api/IngredientApi";
 import { useNavigate } from "react-router-dom";
-import ToastMessage from "../../../components/common/toastmessage/ToastMessage";
+import { useToast } from "../../../context/ToastContext";
 
 const IngredientDetailList = () => {
   const navigate = useNavigate();
@@ -17,8 +17,7 @@ const IngredientDetailList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [sortType, setSortType] = useState("latest");
-  const [showToast, setShowToast] = useState(false);
-  const [toastMessage, setToastMessage] = useState("");
+  const { showToast } = useToast();
 
   // 카테고리 필터 상태
   const [mainCategory, setMainCategory] = useState("");
@@ -251,22 +250,19 @@ const IngredientDetailList = () => {
         closeDeletePopup();
 
         // 성공 메시지 표시
-        setToastMessage("식재료가 삭제되었습니다.");
-        setShowToast(true);
+        showToast("식재료가 삭제되었습니다.");
       } else {
         // 삭제 실패 처리
         console.error("식재료 삭제 실패:", response.error);
 
         // 실패 메시지 표시
-        setToastMessage(response.error || "삭제에 실패했습니다.");
-        setShowToast(true);
+        showToast(response.error || "삭제에 실패했습니다.");
       }
     } catch (error) {
       console.error("식재료 삭제 중 오류:", error);
 
       // 오류 메시지 표시
-      setToastMessage("서버 연결에 실패했습니다.");
-      setShowToast(true);
+      showToast("서버 연결에 실패했습니다.");
     }
   };
 
@@ -458,8 +454,6 @@ const IngredientDetailList = () => {
         outlinedButtonText="취소"
         filledButtonText="삭제하기"
       />
-
-      {showToast && <ToastMessage message={toastMessage} duration={3000} />}
     </>
   );
 };

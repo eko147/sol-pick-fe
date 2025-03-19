@@ -10,20 +10,7 @@
 
 /* 카드 컨테이너 스타일 */
 .card-detail-handler-container {
-  margin-top: 24px;
-  width: 300px;
-  height: 180px;
-  border-radius: 12px;
-  background: linear-gradient(to right, #ff9a9e, #fad0c4, #fad0c4, #ffffff);
-  position: relative;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 15px;
-  cursor: pointer;
+  margin-top: 10px;
 }
 
 /* 메시지 컨테이너 스타일 */
@@ -65,5 +52,5 @@
 
 /* 발급 버튼 호버 효과 */
 .issue-button:hover {
-  background-color: #5b4bc4;
+  background-color: #486eff;
 }

@@ -33,16 +33,12 @@
   margin-bottom: 16px;
 }
 
-.card-image {
-  width: 270px;
-  height: 170px;
-  border-radius: 12px;
-  background: linear-gradient(to bottom, #ffcccc, #ffffff);
+.detail-card-image {
+  width: 100%;
   padding: 16px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: relative;
 }
 
@@ -200,5 +196,5 @@ p {
 }
 
 .apply-button:hover {
-  background-color: #5b4bc4;
+  background-color: #486eff;
 }

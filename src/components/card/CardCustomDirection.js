@@ -28,16 +28,29 @@ const CardCustomDirection = ({ onNext }) => {
               <svg
                 width="100%"
                 height="100%"
-                viewBox="0 0 170 100"
+                viewBox="0 0 343 218"
+                fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
+                <rect
+                  width="343"
+                  height="218"
+                  rx="16"
+                  fill="url(#paint0_linear_409_9202)"
+                />
                 <defs>
-                  <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stopColor="#ffcccc" stopOpacity="1" />
-                    <stop offset="100%" stopColor="#ffffff" stopOpacity="1" />
+                  <linearGradient
+                    id="paint0_linear_409_9202"
+                    x1="0"
+                    y1="0"
+                    x2="343"
+                    y2="218"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop stop-color="#BAE8FB" />
+                    <stop offset="1" stop-color="#B2B1FD" />
                   </linearGradient>
                 </defs>
-                <rect width="170" height="100" rx="10" fill="url(#grad1)" />
               </svg>
             </div>
           </div>
@@ -51,16 +64,29 @@ const CardCustomDirection = ({ onNext }) => {
               <svg
                 width="100%"
                 height="100%"
-                viewBox="0 0 100 170"
+                viewBox="0 0 218 343"
+                fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
+                <rect
+                  width="218"
+                  height="343"
+                  rx="16"
+                  fill="url(#paint0_linear_409_9202)"
+                />
                 <defs>
-                  <linearGradient id="grad2" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stopColor="#ffcccc" stopOpacity="1" />
-                    <stop offset="100%" stopColor="#ffffff" stopOpacity="1" />
+                  <linearGradient
+                    id="paint0_linear_409_9202"
+                    x1="0"
+                    y1="0"
+                    x2="218"
+                    y2="343"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop stop-color="#BAE8FB" />
+                    <stop offset="1" stop-color="#B2B1FD" />
                   </linearGradient>
                 </defs>
-                <rect width="100" height="170" rx="10" fill="url(#grad2)" />
               </svg>
             </div>
           </div>

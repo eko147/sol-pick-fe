@@ -1,13 +1,17 @@
 import "./EventCard.css";
 
 const EventCard = ({ title, description, image, bgColor, additionalDate }) => {
-  // \n을 <br />로 변환
+  // title과 description 모두 HTML 태그를 허용하도록 설정
+  const formattedTitle = title.replace(/\n/g, "<br />");
   const formattedDescription = description.replace(/\n/g, "<br />");
 
   return (
     <div className="event-card" style={{ backgroundColor: bgColor }}>
       <div className="event-content">
-        <h3 className="event-title bold">{title}</h3>
+        <h3
+          className="event-title bold"
+          dangerouslySetInnerHTML={{ __html: formattedTitle }}
+        />
         <p
           className="event-description"
           dangerouslySetInnerHTML={{ __html: formattedDescription }}

@@ -1,20 +1,17 @@
-import { useEffect, useState } from "react";
 import "./ToastMessage.css";
+import { useToast } from "../../../context/ToastContext";
 
-const ToastMessage = ({ message, duration = 3000 }) => {
-  const [visible, setVisible] = useState(true);
+const ToastMessage = () => {
+  const { toast } = useToast();
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setVisible(false);
-    }, duration);
-
-    return () => clearTimeout(timer);
-  }, [duration]);
+  // 토스트가 보이지 않을 때는 아예 DOM에서 제거
+  if (!toast.visible) {
+    return null;
+  }
 
   return (
-    <div className={`toast-container ${visible ? "show-toast" : ""}`}>
-      <p className="toast-message">{message}</p>
+    <div className="toast-container show-toast">
+      <p className="toast-message">{toast.message}</p>
     </div>
   );
 };

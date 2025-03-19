@@ -38,9 +38,9 @@
 
 .event-description {
   font-size: 14px;
-  line-height: 150%;
+  line-height: 160%;
   letter-spacing: 0%;
-  margin-right: 24px;
+  margin-right: 12px;
 }
 
 .event-additional-date {
@@ -52,7 +52,8 @@
 }
 
 .event-image {
-  width: 100px;
-  height: 100px;
-  background-color: #ffffff;
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  /* background-color: #ffffff; */
 }

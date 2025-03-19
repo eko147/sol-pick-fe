@@ -25,7 +25,7 @@ const GameMainPage = () => {
   };
 
   const handleStorageClick = () => {
-    navigate("/game/storage");
+    navigate("/game/storage"); // 추후 구현
   };
 
   // 커스텀 헤더 스타일 정의

@@ -28,7 +28,7 @@
 }
 
 .step-indicator div.active {
-  background-color: #5b4bc4;
+  background-color: #486eff;
 }
 
 .step-number {
@@ -50,19 +50,19 @@
 }
 
 /* 폼 필드 */
-.form-group {
+.apply-form-group {
   margin-bottom: 16px;
   width: 100%;
 }
 
-.form-group label {
+.apply-form-group label {
   display: block;
   font-size: 14px;
   color: #333;
   margin-bottom: 8px;
 }
 
-.form-input {
+.apply-form-input {
   width: 100%;
   padding: 12px;
   border: 1px solid #e0e0e0;
@@ -71,7 +71,7 @@
   box-sizing: border-box;
 }
 
-.form-input::placeholder {
+.apply-form-input::placeholder {
   color: #999;
 }
 
@@ -159,5 +159,5 @@
 }
 
 .apply.next-button:enabled:hover {
-  background-color: #5b4bc4;
+  background-color: #486eff;
 }

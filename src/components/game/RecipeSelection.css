@@ -79,7 +79,7 @@
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
-.recipe-card:hover .recipe-name {
+.recipe-card:hover .game-recipe-name {
   background: linear-gradient(
     to top,
     rgba(0, 0, 0, 0.8),
@@ -96,7 +96,7 @@
   aspect-ratio: 1/1;
 }
 
-.recipe-name {
+.game-recipe-name {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -166,7 +166,7 @@
 }
 
 .recipe-continue-button:hover:not(:disabled) {
-  background-color: #5b4bc4;
+  background-color: #486eff;
   transform: translateY(-2px);
   box-shadow: 0 6px 10px rgba(123, 104, 238, 0.25);
 }
@@ -181,7 +181,7 @@
     border-radius: 14px;
   }
 
-  .recipe-name {
+  .game-recipe-name {
     font-size: 14px;
     padding: 10px;
   }
