@@ -39,7 +39,7 @@
   margin-bottom: 16px;
 }
 
-.loading-text,
+.point-page-container .loading-text,
 .error-message {
   display: flex;
   flex-direction: column;

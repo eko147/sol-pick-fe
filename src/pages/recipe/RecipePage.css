@@ -75,7 +75,7 @@
   animation-delay: 0.6s;
 }
 
-.loading-text {
+.recipe-page-container .loading-text {
   font-family: "DOSGothic", sans-serif;
   font-size: 18px;
   color: #5a4a42;
@@ -101,13 +101,6 @@
   width: 100px;
   height: 100px;
   object-fit: contain;
-}
-
-.loading-text {
-  font-family: "DOSGothic", sans-serif;
-  font-size: 18px;
-  color: #5a4a42;
-  margin: 0;
 }
 
 .loading-subtext {

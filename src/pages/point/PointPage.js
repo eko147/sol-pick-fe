@@ -60,7 +60,7 @@ const PointPage = () => {
 
       <div className="point-page-container">
         {loading ? (
-          <div className="loading-text">로딩 중...</div>
+          <div className="loading-text"></div>
         ) : error ? (
           <div className="error-message">
             <p>{error}</p>

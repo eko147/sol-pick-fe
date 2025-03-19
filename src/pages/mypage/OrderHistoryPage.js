@@ -50,7 +50,7 @@ const OrderHistoryPage = () => {
 
             <div className="order-history-container">
                 {loading ? (
-                    <div className="loading-text">로딩 중...</div>
+                    <div className="loading-text"></div>
                 ) : error ? (
                     <div className="order-error-message">
                         <p>{error}</p>
