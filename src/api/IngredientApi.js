@@ -58,13 +58,15 @@ export const ingredientApi = {
         name: ingredientData.name || "",
         emoji: ingredientData.emoji || "🍎", // 기본 이모지
         image: compressedImage || "",
-        quantity: parseInt(ingredientData.weight) || 0,
+        quantity: parseInt(ingredientData.quantity) || 0,
         expiryDate: ingredientData.expiryDate
           ? new Date(ingredientData.expiryDate).toISOString()
           : null,
         mainCategory: ingredientData.mainCategory || "",
         subCategory: ingredientData.subCategory || "",
         detailCategory: ingredientData.detailCategory || "",
+        createdAt: ingredientData.createdAt || null, // 전달된 생성 시간(주문일)
+        orderHistoryId: ingredientData.orderHistoryId || null, // 주문 내역 ID
       };
 
       // API 요청
@@ -112,7 +114,7 @@ export const ingredientApi = {
         name: ingredientData.name || "",
         emoji: ingredientData.emoji || "🍎", // 기본 이모지
         image: compressedImage || "",
-        quantity: parseInt(ingredientData.weight) || 0,
+        quantity: parseInt(ingredientData.quantity) || 0,
         expiryDate: ingredientData.expiryDate
           ? new Date(ingredientData.expiryDate).toISOString()
           : null,

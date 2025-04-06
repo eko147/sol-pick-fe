@@ -17,7 +17,7 @@ import eggIcon from "../../assets/ing/ing_egg.svg";
 import porkIcon from "../../assets/ing/ing_pork.svg";
 import riceIcon from "../../assets/ing/ing_rice.svg";
 import kimchiIcon from "../../assets/ing/ing_kimchi.svg";
-// import seaweedIcon from "../../assets/ing/ing_seaweed.svg";
+import seaweedIcon from "../../assets/ing/ing_seaweed.svg";
 // import tofuIcon from "../../assets/ing/ing_tofu.svg";
 
 // 레시피 데이터
@@ -55,7 +55,7 @@ export const recipes = [
     imagePath: seaweedSoup,
     points: 10000,
     ingredients: [
-      // { name: "미역", quantity: 2, icon: seaweedIcon },
+      { name: "미역", quantity: 2, icon: seaweedIcon },
       { name: "소고기", quantity: 2, icon: beefIcon },
       { name: "마늘", quantity: 1, icon: garlicIcon },
     ],

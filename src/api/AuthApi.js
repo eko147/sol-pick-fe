@@ -27,6 +27,9 @@ export const authApi = {
   logout: () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    sessionStorage.removeItem("recommendedRecipes");
+    sessionStorage.removeItem("mealPlan");
+
   },
 
   isAuthenticated: () => {

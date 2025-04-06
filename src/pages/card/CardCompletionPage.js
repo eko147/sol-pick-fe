@@ -16,15 +16,17 @@ const CardCompletionPage = () => {
   const handleConfirm = () => navigate("/main");
 
   return (
-    <div className="card-completion-page-container">
+    <>
       <Header title="발급 완료" />
 
-      <div className="card-completion-component-container">
-        <CardCompletion onConfirm={handleConfirm} />
+      <div className="card-completion-page-container">
+        <div className="card-completion-component-container">
+          <CardCompletion onConfirm={handleConfirm} />
+        </div>
       </div>
 
       <Menu />
-    </div>
+    </>
   );
 };
 

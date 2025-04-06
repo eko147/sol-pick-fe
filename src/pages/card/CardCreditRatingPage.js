@@ -22,7 +22,7 @@ const CardCreditRatingPage = () => {
   const handleNext = () => navigate("/card/apply/apply-info");
 
   return (
-    <div className="card-credit-rating-page-container">
+    <>
       <Header
         leftIcon={backArrow}
         title="신용 정보 확인"
@@ -31,12 +31,14 @@ const CardCreditRatingPage = () => {
         onRightClick={handleClose}
       />
 
-      <div className="card-credit-rating-component-container">
-        <CardCreditRating onNext={handleNext} />
+      <div className="card-credit-rating-page-container">
+        <div className="card-credit-rating-component-container">
+          <CardCreditRating onNext={handleNext} />
+        </div>
       </div>
 
       <Menu />
-    </div>
+    </>
   );
 };
 

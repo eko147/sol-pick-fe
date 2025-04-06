@@ -1,21 +1,22 @@
 .game-main-container {
   width: 100%;
-  height: 100vh; /* 높이를 viewport 높이로 고정 */
-  max-width: 480px; /* 모바일 화면 최대 너비 제한 */
-  margin: 0 auto; /* 중앙 정렬 */
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  position: relative;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #f8f8f8;
+  margin: 0 auto;
   z-index: 1;
-  overflow: hidden; /* 컨테이너 자체는 overflow hidden */
+  position: relative;
 }
 
 .game-main-content {
   flex: 1;
   overflow-y: auto; /* 내부 콘텐츠가 넘칠 경우 스크롤 적용 */
-  padding: 20px;
   position: relative;
-  padding-bottom: 100px; /* 하단 패딩 추가 */
+  padding-bottom: 16px;
 }
 
 /* 픽셀 폰트 적용 */

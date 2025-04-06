@@ -1,9 +1,11 @@
 import "./NotiItem.css";
 import expirationIcon from "../../../assets/expiration.svg";
+import groceryIcon from "../../../assets/grocery.svg";
 import reorderIcon from "../../../assets/reorder.svg";
 
 const iconMap = {
   expiration: expirationIcon,
+  refrigerator: groceryIcon,
   reorder: reorderIcon,
 };
 

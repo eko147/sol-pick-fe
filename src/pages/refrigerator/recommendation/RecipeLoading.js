@@ -42,7 +42,7 @@ const RecipeLoading = () => {
   return (
     <>
       <div className="recipe-loading-container">
-        <h2>🍕 레시피를 추천 중입니다...</h2>
+        <h2 className="bold">🍕 레시피를 추천 중입니다...</h2>
         <p>잠시만 기다려 주세요!</p>
         {/* SVG 피자 로딩 애니메이션 */}
         <svg
@@ -124,7 +124,6 @@ const RecipeLoading = () => {
             strokeWidth="2"
           />
         </svg>
-        <Menu />
       </div>
     </>
   );

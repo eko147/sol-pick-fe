@@ -3,18 +3,18 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./RecipeRecommendation.css";
 import RecipeLoading from "./RecipeLoading";
-import Menu from "../../../components/common/menu/Menu";
 import backArrow from "../../../assets/backArrow.svg";
 import "../list/IngredientDetailList.css";
 import Header from "../../../components/common/header/Header";
-
-import MainHeader from "../../../components/common/header/MainHeader";
+import { authApi } from "../../../api/AuthApi";
+import ButtonL from "../../../components/common/button/ButtonL";
 const RecipeRecommendation = () => {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const userId = 1;
+  const currentUser = authApi.getCurrentUser();
+  const userId = currentUser.memberId; // 🔹 실제 로그인된 사용자 ID로 대체 필요
 
   useEffect(() => {
     // ✅ sessionStorage에서 기존 레시피 가져오기
@@ -69,26 +69,47 @@ const RecipeRecommendation = () => {
       setLoading(true);
       setError(null);
 
+      // 디버깅 로그 추가 - 요청 전
+      console.log("사용자 ID:", userId);
+      console.log("인증 헤더:", authApi.getAuthHeader());
+
       const response = await axios.get(
-        `http://localhost:8090/api/refrigerator/recommend/${userId}`
+        `http://localhost:8090/api/refrigerator/recommend/${userId}`,
+        { headers: authApi.getAuthHeader() } // 인증 헤더 추가
       );
+
+      console.log("원본 응답 데이터:", response.data);
 
       let recipeData = response.data;
 
+      // 다양한 응답 형식에 대응
       if (typeof recipeData === "string") {
-        recipeData = JSON.parse(recipeData);
+        try {
+          recipeData = JSON.parse(recipeData);
+        } catch (parseError) {
+          console.error("JSON 파싱 실패:", parseError);
+          throw new Error("응답 데이터 파싱 실패");
+        }
       }
 
+      // content 속성 확인
       if (recipeData.message && recipeData.message.content) {
-        recipeData = JSON.parse(recipeData.message.content);
+        try {
+          recipeData = JSON.parse(recipeData.message.content);
+        } catch (parseError) {
+          console.error("메시지 content JSON 파싱 실패:", parseError);
+          throw new Error("메시지 content 파싱 실패");
+        }
       }
 
+      // recipes 배열 검증
       if (
         !recipeData ||
         !recipeData.recipes ||
         !Array.isArray(recipeData.recipes)
       ) {
-        throw new Error("잘못된 응답 형식입니다.");
+        console.error("잘못된 레시피 데이터 형식:", recipeData);
+        throw new Error("레시피 데이터 형식이 유효하지 않습니다.");
       }
 
       const recipeList = await Promise.all(
@@ -108,10 +129,18 @@ const RecipeRecommendation = () => {
       );
 
       setRecipes(recipeList);
-      sessionStorage.setItem("recommendedRecipes", JSON.stringify(recipeList)); // ✅ 저장
+      sessionStorage.setItem("recommendedRecipes", JSON.stringify(recipeList));
     } catch (err) {
+      // 더 자세한 에러 로깅
+      console.error("완전한 에러 객체:", err);
+      console.error("에러 응답:", err.response);
+      console.error("에러 상태:", err.response?.status);
+      console.error("에러 데이터:", err.response?.data);
+
       setError(
-        err.response?.data?.message || err.message || "네트워크 오류 발생"
+        err.response?.data?.message ||
+          err.message ||
+          "레시피를 불러오는 중 오류가 발생했습니다."
       );
     } finally {
       setLoading(false);
@@ -119,12 +148,12 @@ const RecipeRecommendation = () => {
   };
 
   const goToRecipeDetail = (recipe) => {
-    navigate(`/recipe-detail/${recipe.id}`, { state: { recipe } });
+    navigate(`/refrigerator/recipe-detail/${recipe.id}`, { state: { recipe } });
   };
 
   return (
     <>
-      <MainHeader />
+      {/* <MainHeader /> */}
       <Header
         leftIcon={backArrow}
         title="🍽️ 추천 레시피"
@@ -138,7 +167,7 @@ const RecipeRecommendation = () => {
           <p className="error-message">❌ {error}</p>
         ) : (
           <>
-            <div className="recipe-grid">
+            <div className="recipe-recommendation-grid">
               {recipes.map((recipe) => (
                 <div
                   key={recipe.id}
@@ -155,7 +184,7 @@ const RecipeRecommendation = () => {
               ))}
             </div>
 
-            <button
+            {/* <button
               className="refresh-button"
               onClick={() => {
                 sessionStorage.removeItem("recommendedRecipes"); // ✅ 기존 데이터 삭제
@@ -163,10 +192,17 @@ const RecipeRecommendation = () => {
               }}
             >
               다른 레시피 추천받기
-            </button>
+            </button> */}
+            <ButtonL
+              className="refresh-button"
+              onClick={() => {
+                sessionStorage.removeItem("recommendedRecipes"); // ✅ 기존 데이터 삭제
+                fetchRecommendedRecipes(); // ✅ 새로운 레시피 가져오기
+              }}
+              text="다른 레시피 추천받기"
+            />
           </>
         )}
-        <Menu />
       </div>
     </>
   );

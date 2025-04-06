@@ -22,7 +22,7 @@ const CardCustomStickerPage = () => {
   const handleNext = () => navigate("/card/apply/identity-verification");
 
   return (
-    <div className="card-custom-sticker-page-container">
+    <>
       <Header
         leftIcon={backArrow}
         title="카드 디자인"
@@ -31,12 +31,14 @@ const CardCustomStickerPage = () => {
         onRightClick={handleClose}
       />
 
-      <div className="card-custom-sticker-component-container">
-        <CardCustomSticker onNext={handleNext} />
+      <div className="card-custom-sticker-page-container">
+        <div className="card-custom-sticker-component-container">
+          <CardCustomSticker onNext={handleNext} />
+        </div>
       </div>
 
       <Menu />
-    </div>
+    </>
   );
 };
 

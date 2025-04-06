@@ -21,7 +21,7 @@ const CardIdentityVerificationPage = () => {
   const handleClose = () => navigate("/card");
 
   return (
-    <div className="identity-verification-page">
+    <>
       <Header
         leftIcon={backArrow}
         title="본인 인증"
@@ -30,12 +30,14 @@ const CardIdentityVerificationPage = () => {
         onRightClick={handleClose}
       />
 
-      <div className="identity-verification-page-content">
-        <CardIdentityVerification />
+      <div className="identity-verification-page">
+        <div className="identity-verification-page-content">
+          <CardIdentityVerification />
+        </div>
       </div>
 
       <Menu />
-    </div>
+    </>
   );
 };
 

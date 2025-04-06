@@ -28,7 +28,7 @@ const PointHistoryItem = ({
                 >
                     <rect width="36" height="36" rx="18" fill={isEarn ? "#F3F0FF" : "#F0F9FF"} />
                     {isEarn ? (
-                        // 적립 아이콘
+                        // 적립 아이콘 (체크 표시)
                         <path
                             d="M14 18L17 21L22 15"
                             stroke="#38bdf8"
@@ -37,9 +37,9 @@ const PointHistoryItem = ({
                             strokeLinejoin="round"
                         />
                     ) : (
-                        // 사용 아이콘
+                        // 사용 아이콘 (- 모양)
                         <path
-                            d="M18 14V22M14 18H22"
+                            d="M14 18H22"
                             stroke="#0EA5E9"
                             strokeWidth="1.5"
                             strokeLinecap="round"

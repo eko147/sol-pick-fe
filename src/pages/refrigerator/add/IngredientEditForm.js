@@ -30,7 +30,7 @@ const IngredientEditForm = () => {
     mainCategory: "",
     subCategory: "",
     detailCategory: "",
-    weight: "",
+    quantity: "",
     image: "",
   });
 
@@ -96,7 +96,7 @@ const IngredientEditForm = () => {
       mainCategory: ingredient.mainCategory || "",
       subCategory: ingredient.subCategory || "",
       detailCategory: ingredient.detailCategory || "",
-      weight: ingredient.quantity?.toString() || "",
+      quantity: ingredient.quantity?.toString() || "",
       image: ingredient.image || "",
     });
 
@@ -211,14 +211,14 @@ const IngredientEditForm = () => {
     }
 
     // 중량 검증
-    if (!formData.weight) {
+    if (!formData.quantity) {
       showToast("중량을 입력해주세요.");
 
       return false;
     }
 
     // 중량이 정수인지 확인
-    if (formData.weight && isNaN(parseInt(formData.weight))) {
+    if (formData.quantity && isNaN(parseInt(formData.quantity))) {
       showToast("중량은 정수만 입력 가능합니다.");
 
       return false;
@@ -241,7 +241,7 @@ const IngredientEditForm = () => {
       // formData 준비 (userId 필요 없음)
       const ingredientData = {
         ...formData,
-        weight: parseInt(formData.weight), // weight를 int로 변환
+        quantity: parseInt(formData.quantity), // quantity를 int로 변환
         image: formData.image || imagePreview, // image 데이터 저장
       };
 
@@ -559,8 +559,8 @@ const IngredientEditForm = () => {
           <Input
             className="add-form-input"
             placeholder="중량(g)을 입력해 주세요."
-            name="weight"
-            value={formData.weight}
+            name="quantity"
+            value={formData.quantity}
             onChange={handleInputChange}
           />
         </div>
@@ -571,21 +571,21 @@ const IngredientEditForm = () => {
           text="취소"
           variant="outlined"
           onClick={() => window.history.back()}
-          disabled={isLoading}
+          // disabled={isLoading}
         />
         <ButtonL
-          text={isLoading ? "처리 중..." : "수정하기"}
+          // text={isLoading ? "처리 중..." : "수정하기"}
+          text={"수정하기"}
           onClick={() => {
             if (validateFormInline()) {
               handleSubmit();
             }
           }}
-          disabled={isLoading}
+          // disabled={isLoading}
         />
       </div>
 
-      <div style={{ height: "100px" }}></div>
-      <Menu />
+      <div style={{ height: "24px" }}></div>
     </>
   );
 };

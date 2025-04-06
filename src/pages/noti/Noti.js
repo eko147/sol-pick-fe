@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 const Noti = () => {
   const navigate = useNavigate();
-  const chipItems = ["전체", "유통기한", "재구매"];
+  const chipItems = ["전체", "유통기한", "냉장고", "재구매"];
 
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -78,7 +78,10 @@ const Noti = () => {
       }
     }
     // 알림 타입에 따른 페이지 이동
-    if (notification.type === "expiration") {
+    if (
+      notification.type === "expiration" ||
+      notification.type === "refrigerator"
+    ) {
       navigate("/refrigerator");
     }
 
@@ -89,6 +92,7 @@ const Noti = () => {
   const filteredNotifications = notifications.filter((noti) => {
     if (selectedFilter === 0) return true;
     if (selectedFilter === 1) return noti.type === "expiration";
+    if (selectedFilter === 2) return noti.type === "refrigerator";
     if (selectedFilter === 2) return noti.type === "reorder";
     return false;
   });

@@ -13,11 +13,12 @@
 }
 
 /* 픽셀 폰트 적용 - 한글과 영문 모두 지원하는 폰트 스택 */
-.pixel-font-kr {
+.pixel-font-kr-1 {
   font-family: "DungGeunMo", "Press Start 2P", cursive !important;
   letter-spacing: -0.5px; /* 한글 간격 조정 */
   word-spacing: 1px;
   line-height: 1.5;
+  white-space: nowrap;
 }
 
 .character-section {

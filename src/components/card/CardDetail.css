@@ -1,12 +1,9 @@
 /* 전체 컨테이너 스타일 */
 .card-detail-container {
   width: 100%;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   position: relative;
   overflow: hidden;
 }
@@ -34,12 +31,15 @@
 }
 
 .detail-card-image {
-  width: 100%;
-  padding: 16px;
+  padding: 16px 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
+}
+
+.basic-design-front {
+  width: 100%;
 }
 
 /* 카드 제목 및 설명 섹션 */
@@ -185,14 +185,14 @@ p {
   color: white;
   border: none;
   border-radius: 12px;
-  padding: 12px 50px;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s;
   width: 85%;
   margin: 0 auto;
-  margin-bottom: 100px;
+  margin-top: 10px;
+  padding: 12px 50px;
 }
 
 .apply-button:hover {

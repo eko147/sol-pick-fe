@@ -38,7 +38,7 @@ const CardDetailPage = () => {
   };
 
   return (
-    <div className="card-detail-page-container">
+    <>
       <Header
         leftIcon={backArrow}
         title="신한카드 쏠픽(SOL Pick)"
@@ -46,13 +46,13 @@ const CardDetailPage = () => {
         onLeftClick={handleGoBack}
         onRightClick={handleClose}
       />
-
-      <div className="card-detail-component-container">
-        <CardDetail cardData={cardData} onNext={handleNext} />
+      <div className="card-detail-page-container">
+        <div className="card-detail-component-container">
+          <CardDetail cardData={cardData} onNext={handleNext} />
+        </div>
       </div>
-
       <Menu />
-    </div>
+    </>
   );
 };
 

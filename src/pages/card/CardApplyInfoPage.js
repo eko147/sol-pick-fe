@@ -22,7 +22,7 @@ const CardApplyInfoPage = () => {
   const handleNext = () => navigate("/card/apply/completion");
 
   return (
-    <div className="card-apply-info-page-container">
+    <>
       <Header
         leftIcon={backArrow}
         title="카드 신청 정보 입력"
@@ -31,12 +31,14 @@ const CardApplyInfoPage = () => {
         onRightClick={handleClose}
       />
 
-      <div className="card-apply-info-component-container">
-        <CardApplyForm onNext={handleNext} />
+      <div className="card-apply-info-page-container">
+        <div className="card-apply-info-component-container">
+          <CardApplyForm onNext={handleNext} />
+        </div>
       </div>
 
       <Menu />
-    </div>
+    </>
   );
 };
 

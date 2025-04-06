@@ -2,9 +2,14 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: calc(100vh - 144px); /* 헤더 + 메뉴 높이 고려 */
   overflow-y: auto;
-  padding-bottom: 88px; /* 메뉴 높이만큼 패딩 */
+  /* 스크롤바 숨김 처리 */
+  -ms-overflow-style: none;
+}
+
+/* Chrome, Safari용 스크롤바 숨김 */
+.order-history-container::-webkit-scrollbar {
+  display: none;
 }
 
 .no-order-message {

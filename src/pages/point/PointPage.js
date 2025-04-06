@@ -8,6 +8,7 @@ import PointSummary from "../../components/point/PointSummary";
 import PointHistoryList from "../../components/point/PointHistoryList";
 import { authApi } from "../../api/AuthApi";
 import { pointApi } from "../../api/PointApi";
+import game from "../../assets/game.svg";
 
 const PointPage = () => {
   const navigate = useNavigate();
@@ -37,11 +38,12 @@ const PointPage = () => {
     // setLoading(true);
     try {
       // 병렬로 데이터 가져오기
-      const [cardInfoData, pointSummaryData, pointHistoryData] = await Promise.all([
-        pointApi.getCardInfo(),
-        pointApi.getPointSummary(),
-        pointApi.getPointHistory()
-      ]);
+      const [cardInfoData, pointSummaryData, pointHistoryData] =
+        await Promise.all([
+          pointApi.getCardInfo(),
+          pointApi.getPointSummary(),
+          pointApi.getPointHistory(),
+        ]);
 
       setCardInfo(cardInfoData);
       setPointSummary(pointSummaryData);
@@ -82,9 +84,12 @@ const PointPage = () => {
           </>
         )}
         {/* 게임 버튼 - 페이지 내부에 위치 */}
-        <button className="round-game-button" onClick={navigateToGame}>
-          🎮
-        </button>
+        <div
+          className="round-game-button round-game-button-pulse"
+          onClick={navigateToGame}
+        >
+          <img src={game} alt="game" className="game-icon" />
+        </div>
       </div>
 
       <Menu />

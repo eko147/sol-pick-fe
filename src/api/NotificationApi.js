@@ -75,4 +75,30 @@ export const notificationApi = {
       return "?"; // 에러 발생 시 ?으로 표시
     }
   },
+
+  // 알림 생성
+  createNotification: async (notificationData) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/api/solpick/noti/create`,
+        notificationData,
+        {
+          headers: {
+            ...authApi.getAuthHeader(),
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      return {
+        success: true,
+        data: response.data,
+      };
+    } catch (error) {
+      console.error("알림 생성 실패:", error);
+      return {
+        success: false,
+        error: error.message || "알림 생성에 실패했습니다.",
+      };
+    }
+  },
 };

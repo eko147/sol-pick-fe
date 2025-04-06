@@ -23,7 +23,7 @@ const CardDesignSelectionPage = () => {
   const handleGoToCustomize = () => navigate("/card/apply/custom/background");
 
   return (
-    <div className="card-design-selection-page-container">
+    <>
       <Header
         leftIcon={backArrow}
         title="카드 신청"
@@ -31,16 +31,16 @@ const CardDesignSelectionPage = () => {
         onLeftClick={handleBack}
         onRightClick={handleClose}
       />
-
-      <div className="card-design-selection-component-container">
-        <CardDesignSelection
-          onNext={handleNext}
-          onCustomize={handleGoToCustomize}
-        />
+      <div className="card-design-selection-page-container">
+        <div className="card-design-selection-component-container">
+          <CardDesignSelection
+            onNext={handleNext}
+            onCustomize={handleGoToCustomize}
+          />
+        </div>
       </div>
-
       <Menu />
-    </div>
+    </>
   );
 };
 

@@ -1,6 +1,5 @@
 import "./IngredientAddForm.css";
 import Header from "../../../components/common/header/Header";
-// import backArrow from "../../../assets/backArrow.svg";
 import close from "../../../assets/close.svg";
 import Input from "../../../components/common/input/Input";
 import SelectL from "../../../components/common/select/SelectL";
@@ -27,6 +26,9 @@ const IngredientAddForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { showToast } = useToast();
 
+  // 연속 입력 모드 상태 추가
+  const [continuousMode, setContinuousMode] = useState(false);
+
   // 등록된 식재료 개수 추적
   const [registeredCount, setRegisteredCount] = useState(0);
   // 건너뛴 식재료 개수 추적
@@ -39,7 +41,7 @@ const IngredientAddForm = () => {
     mainCategory: "",
     subCategory: "",
     detailCategory: "",
-    weight: "",
+    quantity: "",
     image: "",
   });
 
@@ -105,28 +107,24 @@ const IngredientAddForm = () => {
     // 이모지 검증
     if (!formData.emoji) {
       showToast("아이콘을 선택해주세요.");
-
       return false;
     }
 
     // 식재료명 검증
     if (!formData.name.trim()) {
       showToast("식재료명을 입력해주세요.");
-
       return false;
     }
 
     // 사진 첨부 검증
     if (!formData.image && !imagePreview) {
       showToast("사진을 첨부해주세요.");
-
       return false;
     }
 
     // 유통기한 검증
     if (!formData.expiryDate) {
       showToast("유통기한을 입력해주세요.");
-
       return false;
     }
 
@@ -136,42 +134,36 @@ const IngredientAddForm = () => {
     const expiryDate = new Date(formData.expiryDate);
     if (expiryDate < today) {
       showToast("유통기한은 오늘 이후로 설정해주세요.");
-
       return false;
     }
 
     // 대분류 검증
     if (!formData.mainCategory) {
       showToast("대분류를 선택해주세요.");
-
       return false;
     }
 
     // 중분류 검증
     if (!formData.subCategory) {
       showToast("중분류를 선택해주세요.");
-
       return false;
     }
 
     // 소분류 검증
     if (!formData.detailCategory) {
       showToast("소분류를 선택해주세요.");
-
       return false;
     }
 
     // 중량 검증
-    if (!formData.weight) {
+    if (!formData.quantity) {
       showToast("중량을 입력해주세요.");
-
       return false;
     }
 
     // 중량이 정수인지 확인
-    if (formData.weight && isNaN(parseInt(formData.weight))) {
+    if (formData.quantity && isNaN(parseInt(formData.quantity))) {
       showToast("중량은 정수만 입력 가능합니다.");
-
       return false;
     }
 
@@ -191,7 +183,7 @@ const IngredientAddForm = () => {
       moveToNextIngredient();
       showToast("식재료를 건너뛰었습니다.");
     } else {
-      // 마지막 식재료이거나 식재료가 없을, 냉장고 화면으로 이동
+      // 마지막 식재료이거나 식재료가 없을 때, 냉장고 화면으로 이동
 
       // 등록된 식재료 수에 따라 메시지 결정
       let message;
@@ -205,6 +197,21 @@ const IngredientAddForm = () => {
 
       navigate("/refrigerator");
     }
+  };
+
+  // 폼 초기화 함수
+  const resetForm = () => {
+    setFormData({
+      emoji: "",
+      name: "",
+      expiryDate: "",
+      mainCategory: "",
+      subCategory: "",
+      detailCategory: "",
+      quantity: "",
+      image: "",
+    });
+    setImagePreview(null);
   };
 
   // 다음 식재료로 이동하는 함수
@@ -241,7 +248,7 @@ const IngredientAddForm = () => {
         mainCategory: "",
         subCategory: "",
         detailCategory: "",
-        weight: "",
+        quantity: "",
       });
 
       // 이미지 미리보기 상태를 초기화
@@ -256,14 +263,15 @@ const IngredientAddForm = () => {
     return false;
   };
 
-  // 폼 제출 핸들러
-  const handleSubmit = async () => {
-    // 유효성 검사 실행
-    if (!validateFormInline()) {
-      return;
+  // 연속 입력 모드 전환 핸들러
+  const handleContinuousMode = () => {
+    if (validateFormInline()) {
+      saveIngredient(true);
     }
+  };
 
-    // 식재료 저장 API 호출
+  // 식재료 저장 공통 로직
+  const saveIngredient = async (isContinuous = false) => {
     setIsLoading(true);
     try {
       // 현재 로그인한 사용자 정보 가져오기
@@ -271,7 +279,6 @@ const IngredientAddForm = () => {
 
       if (!currentUser) {
         showToast("로그인이 필요합니다.");
-
         setIsLoading(false);
         return false;
       }
@@ -279,7 +286,7 @@ const IngredientAddForm = () => {
       // formData에 userId 추가
       const ingredientData = {
         ...formData,
-        weight: parseInt(formData.weight), // weight를 int로 변환
+        quantity: parseInt(formData.quantity), // quantity를 int로 변환
         image: formData.image || imagePreview, // image 데이터 저장
         userId: currentUser.memberId,
       };
@@ -289,46 +296,84 @@ const IngredientAddForm = () => {
 
       if (!result.success) {
         showToast(result.error || "식재료 저장에 실패했습니다.");
-
         setIsLoading(false);
-        return;
+        return false;
       }
 
       // 등록 성공 시 등록된 식재료 개수 증가
       setRegisteredCount((prevCount) => prevCount + 1);
+
+      // 연속 모드일 경우 폼 초기화 및 추가 입력 준비
+      if (isContinuous && !isFromReceipt) {
+        resetForm();
+        setContinuousMode(true);
+
+        // 부드럽게 스크롤을 맨 위로 이동
+        const wrapper = document.querySelector(".wrapper");
+        if (wrapper) {
+          wrapper.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        }
+
+        showToast("다음 식재료를 등록해 주세요.");
+        setIsLoading(false);
+        return true;
+      }
+
+      setIsLoading(false);
+      return true;
     } catch (error) {
       console.error("식재료 저장 중 오류 발생:", error);
       showToast("다시 시도해주세요.");
-
       setIsLoading(false);
+      return false;
+    }
+  };
+
+  // 폼 제출 핸들러
+  const handleSubmit = async () => {
+    // 유효성 검사 실행
+    if (!validateFormInline()) {
       return;
     }
-    setIsLoading(false);
 
-    // 다음 식재료가 있는지 확인
+    // 영수증에서 온 경우에만 다음 로직 실행
     if (isFromReceipt && ingredientNames.length > 0) {
-      const hasNext = moveToNextIngredient();
+      const result = await saveIngredient();
 
-      // 다음 식재료가 있으면 함수 종료
-      if (hasNext) {
+      if (result) {
+        const hasNext = moveToNextIngredient();
+
+        // 다음 식재료가 있으면 함수 종료
+        if (hasNext) {
+          return;
+        }
+      }
+    } else {
+      // 일반 모드: 연속 모드 비활성화 상태에서 등록
+      const result = await saveIngredient(false);
+
+      if (result) {
+        if (continuousMode) {
+          // 연속 모드에서 마지막 등록 시
+          showToast(`${registeredCount + 1}개의 식재료가 등록되었습니다.`);
+          navigate("/refrigerator");
+        } else {
+          // 직접 입력일 경우, 첫 등록 완료 (연속 모드가 아닌 경우)
+          showToast("1개의 식재료가 등록되었습니다.");
+          navigate("/refrigerator");
+        }
         return;
       }
     }
 
-    // 모든 식재료 입력 완료
-    // 1. 직접 입력일 때
-    if (!isFromReceipt) {
-      showToast("1개의 식재료가 등록되었습니다.");
+    // 영수증 모드에서 마지막 등록 완료 시
+    if (isFromReceipt) {
+      showToast(`${registeredCount + 1}개의 식재료가 등록되었습니다.`);
+      navigate("/refrigerator");
     }
-    // 2. 영수증 입력일 때 (전체 또는 일부 식재료 등록)
-    else {
-      // 현재까지 등록된 식재료 수 표시 (방금 등록한 것 포함)
-      const totalRegistered = registeredCount + 1;
-      showToast(`${totalRegistered}개의 식재료가 등록되었습니다.`);
-    }
-
-    // 냉장고 메인 페이지로 이동
-    navigate("/refrigerator");
   };
 
   // 카테고리 데이터
@@ -525,14 +570,15 @@ const IngredientAddForm = () => {
 
   // 버튼 텍스트 계산
   const getButtonText = () => {
-    if (isLoading) {
-      return "처리 중...";
-    }
+    // if (isLoading) {
+    //   return "처리 중...";
+    // }
 
     if (isFromReceipt && ingredientNames.length > 0) {
       if (currentIngredientIndex < ingredientNames.length - 1) {
         return "다음";
       }
+      return "등록하기";
     }
 
     return "등록하기";
@@ -544,10 +590,8 @@ const IngredientAddForm = () => {
   return (
     <>
       <Header
-        // leftIcon={backArrow}
         title={getHeaderTitle()}
         rightIcon={close}
-        // onLeftClick={() => window.history.back()}
         onRightClick={() => navigate("/refrigerator")}
       />
 
@@ -616,14 +660,18 @@ const IngredientAddForm = () => {
           <h3 className="add-form-label bold">분류기준</h3>
           <div className="add-form-select-container">
             <SelectL
-              key={`main-category-${currentIngredientIndex}`}
+              key={`main-category-${currentIngredientIndex}-${
+                continuousMode ? registeredCount : 0
+              }`}
               options={mainOptions}
               className="select-item"
               value={formData.mainCategory}
               onChange={handleMainCategoryChange}
             />
             <SelectL
-              key={`sub-category-${currentIngredientIndex}`}
+              key={`sub-category-${currentIngredientIndex}-${
+                continuousMode ? registeredCount : 0
+              }`}
               options={getSubOptions()}
               className="select-item"
               value={formData.subCategory}
@@ -631,7 +679,9 @@ const IngredientAddForm = () => {
               disabled={!formData.mainCategory}
             />
             <SelectL
-              key={`detail-category-${currentIngredientIndex}`}
+              key={`detail-category-${currentIngredientIndex}-${
+                continuousMode ? registeredCount : 0
+              }`}
               options={getDetailOptions()}
               className="select-item"
               value={formData.detailCategory}
@@ -648,42 +698,51 @@ const IngredientAddForm = () => {
           <Input
             className="add-form-input"
             placeholder="중량(g)을 입력해 주세요."
-            name="weight"
-            value={formData.weight}
+            name="quantity"
+            value={formData.quantity}
             onChange={handleInputChange}
           />
         </div>
       </div>
 
       <div className="add-form-button-container">
-        {/* 건너뛰기 버튼 - 여러 식재료가 있을 때만 표시 */}
+        {/* 건너뛰기 버튼 - 영수증 모드에서만 표시 */}
         {showSkipButton && (
           <ButtonL
             text="건너뛰기"
             variant="outlined"
             onClick={skipCurrentIngredient}
-            disabled={isLoading}
+            // disabled={isLoading}
           />
         )}
-        <ButtonL
-          text="취소"
-          variant="outlined"
-          onClick={() => window.history.back()}
-          disabled={isLoading}
-        />
+
+        {/* 추가 등록 버튼 - 직접 입력 모드에서만 표시 */}
+        {!isFromReceipt && (
+          <ButtonL
+            text="추가하기"
+            variant="outlined"
+            onClick={handleContinuousMode}
+            // disabled={isLoading}
+          />
+        )}
+
+        {/* 등록 버튼 - 항상 표시 */}
         <ButtonL
           text={getButtonText()}
           onClick={() => {
             if (validateFormInline()) {
+              // 연속 모드에서 '등록하기'는 모든 등록을 완료하고 냉장고로 이동
+              if (!isFromReceipt) {
+                setContinuousMode(false);
+              }
               handleSubmit();
             }
           }}
-          disabled={isLoading}
+          // disabled={isLoading}
         />
       </div>
 
-      <div style={{ height: "100px" }}></div>
-      <Menu />
+      <div style={{ height: "24px" }}></div>
     </>
   );
 };

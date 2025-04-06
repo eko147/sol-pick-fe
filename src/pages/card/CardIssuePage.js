@@ -67,7 +67,7 @@ const CardIssuePage = () => {
   }
 
   return (
-    <div className="card-issue-page-container">
+    <>
       <MainHeader
         leftIcon={shop}
         leftIconActive={shopActive}
@@ -76,29 +76,32 @@ const CardIssuePage = () => {
         onLeftClick={navigateToShop}
         onRightClick={navigateToNoti}
       />
+      <div className="card-issue-page-container">
+        <div
+          className="card-detail-handler-container"
+          onClick={handleCardDetail}
+        >
+          <img
+            src={BasicDesignFront}
+            alt="Basic Design Front"
+            className="basic-design-front"
+          />
+        </div>
 
-      <div className="card-detail-handler-container" onClick={handleCardDetail}>
-        <img
-          src={BasicDesignFront}
-          alt="Basic Design Front"
-          className="basic-design-front"
-        />
+        <div className="message-container">
+          <h2 className="message-title">
+            아직 쏠픽(SOL Pick) 카드가 없으신가요?
+          </h2>
+          <p className="message-subtext">
+            쏠픽(SOL Pick) 카드를 발급받고 다양한 혜택을 누려보세요.
+          </p>
+          <button className="issue-button" onClick={handleCardIssue}>
+            카드 발급받기
+          </button>
+        </div>
       </div>
-
-      <div className="message-container">
-        <h2 className="message-title">
-          아직 쏠픽(SOL Pick) 카드가 없으신가요?
-        </h2>
-        <p className="message-subtext">
-          쏠픽(SOL Pick) 카드를 발급받고 다양한 혜택을 누려보세요.
-        </p>
-        <button className="issue-button" onClick={handleCardIssue}>
-          카드 발급받기
-        </button>
-      </div>
-
       <Menu />
-    </div>
+    </>
   );
 };
 

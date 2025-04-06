@@ -22,7 +22,7 @@ const CardTermsPage = () => {
   const handleNext = () => navigate("/card/apply/credit-rating");
 
   return (
-    <div className="card-terms-page-container">
+    <>
       <Header
         leftIcon={backArrow}
         title="약관 동의"
@@ -31,12 +31,13 @@ const CardTermsPage = () => {
         onRightClick={handleClose}
       />
 
-      <div className="card-terms-component-container">
-        <CardTerms onNext={handleNext} />
+      <div className="card-terms-page-container">
+        <div className="card-terms-component-container">
+          <CardTerms onNext={handleNext} />
+        </div>
       </div>
-
       <Menu />
-    </div>
+    </>
   );
 };
 

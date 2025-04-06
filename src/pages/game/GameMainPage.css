@@ -1,14 +1,36 @@
 .game-main-page-container {
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  margin: 0 auto; /* 화면 중앙 정렬 */
   display: flex;
   flex-direction: column;
   padding: 0;
-  margin: 0;
+  position: relative;
+  overflow: hidden; /* 전체 컨테이너는 overflow hidden */
+  background-color: #222034; /* 픽셀 아트 배경색 */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* 모바일 앱 느낌을 위한 그림자 */
 }
 
 .game-main-component-container {
-  flex: 1;
+  width: 100%;
+  height: calc(100% - 60px);
+  max-height: 100%; /* 모바일 화면 최대 높이 */
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 1;
+  overflow: auto;
+
+  /* 스크롤바 숨김 처리 */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Chrome, Safari, Opera에서 스크롤바 숨김 */
+.game-main-component-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* 스크롤 부드럽게 처리 */
+.game-main-component-container {
+  -webkit-overflow-scrolling: touch; /* iOS에서 부드러운 스크롤 */
 }

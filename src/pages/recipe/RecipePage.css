@@ -1,21 +1,93 @@
+/* RecipePage.css - 구조 정리 */
+
+/* 기본 컨테이너 레이아웃 */
+.recipe-page-container {
+  width: 100%;
+  height: calc(100% - 56px); /* 헤더 높이 제외 */
+  background-color: white;
+  overflow-y: auto;
+}
+
+.recipe-page-content {
+  height: 100%;
+  width: 100%;
+}
+
+/* 로딩 관련 스타일 */
 .recipe-page-loading-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 1;
-  height: calc(100vh - 100px); /* 헤더와 메뉴 높이 제외 */
-  /* background-color: #fff9f3; */
-  background-color: white;
+  height: 100%;
+  width: 100%;
 }
 
 .loading-content {
-  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  text-align: center;
   gap: 20px;
 }
 
+.loading-gif {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.loading-text {
+  font-size: 18px;
+  color: #5a4a42;
+  margin: 0;
+}
+
+.loading-subtext {
+  font-size: 14px;
+  color: #888;
+  margin: 0;
+}
+
+/* 에러 메시지 */
+.recipe-page-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: #ff6b6b;
+  padding: 20px;
+  text-align: center;
+}
+
+/* 애니메이션 관련 스타일 (필요시) */
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-15deg);
+  }
+  75% {
+    transform: rotate(15deg);
+  }
+}
+
+.animate-whisk {
+  animation: wiggle 1s ease-in-out infinite;
+  animation-delay: 0s;
+}
+.animate-spatula {
+  animation: wiggle 1s ease-in-out infinite;
+  animation-delay: 0.3s;
+}
+.animate-pot {
+  animation: wiggle 1s ease-in-out infinite;
+  animation-delay: 0.6s;
+}
+
+/* 요리 도구 아이콘 (현재 사용되지 않음) */
 .cooking-tools {
   display: flex;
   justify-content: center;
@@ -45,82 +117,4 @@
 
 .pot {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3E%3Cpath d='M20 7h-4V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2H4a1 1 0 00-1 1v3a4 4 0 004 4h1a5 5 0 005 5 5 5 0 005-5h1a4 4 0 004-4V8a1 1 0 00-1-1zm-9-2h4v2h-4V5z'/%3E%3C/svg%3E");
-}
-
-@keyframes wiggle {
-  0%,
-  100% {
-    transform: rotate(0deg);
-  }
-  25% {
-    transform: rotate(-15deg);
-  }
-  75% {
-    transform: rotate(15deg);
-  }
-}
-
-.animate-whisk {
-  animation: wiggle 1s ease-in-out infinite;
-  animation-delay: 0s;
-}
-
-.animate-spatula {
-  animation: wiggle 1s ease-in-out infinite;
-  animation-delay: 0.3s;
-}
-
-.animate-pot {
-  animation: wiggle 1s ease-in-out infinite;
-  animation-delay: 0.6s;
-}
-
-.recipe-page-container .loading-text {
-  font-family: "DOSGothic", sans-serif;
-  font-size: 18px;
-  color: #5a4a42;
-  margin: 0;
-}
-
-.loading-subtext {
-  font-family: "EarlyFontDiary", sans-serif;
-  font-size: 14px;
-  color: #888;
-  margin: 0;
-}
-
-.loading-content {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-.loading-gif {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
-}
-
-.loading-subtext {
-  font-family: "EarlyFontDiary", sans-serif;
-  font-size: 14px;
-  color: #888;
-  margin: 0;
-}
-
-.recipe-page-loading,
-.recipe-page-error {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-  font-size: 14px;
-  color: #969696;
-  padding-top: 50px; /* 헤더 아래에 표시되도록 패딩 추가 */
-}
-
-.recipe-page-error {
-  color: #ff6b6b;
 }

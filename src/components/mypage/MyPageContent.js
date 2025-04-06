@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./MyPageContent.css";
@@ -5,6 +6,25 @@ import { authApi } from "../../api/AuthApi";
 import ButtonS from "../common/button/ButtonS";
 import MyPageMenuItem from "./MyPageMenuItem";
 import { useToast } from "../../context/ToastContext";
+
+// 새로운 RecipeBanner 컴포넌트
+const RecipeBanner = () => {
+  return (
+    <div className="recipe-banner">
+      {/* <div className="recipe-banner-icon">
+      </div> */}
+      <div className="recipe-banner-content">
+        <h3>당신이 선택한 레시피</h3>
+        <p>이제 들으면서 요리하세요</p>
+      </div>
+      <div className="recipe-banner-headphone">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4.75 13C4.75 8.99594 8.02411 5.75 12 5.75C15.9759 5.75 19.25 8.99594 19.25 13V18.25C19.25 19.3546 18.3546 20.25 17.25 20.25H16.75C15.6454 20.25 14.75 19.3546 14.75 18.25V14.75C14.75 13.6454 15.6454 12.75 16.75 12.75H19.25M4.75 13V18.25C4.75 19.3546 5.64543 20.25 6.75 20.25H7.25C8.35457 20.25 9.25 19.3546 9.25 18.25V14.75C9.25 13.6454 8.35457 12.75 7.25 12.75H4.75" stroke="#0A84FF" strokeWidth="1.5" />
+        </svg>
+      </div>
+    </div>
+  );
+};
 
 const MyPageContent = () => {
   const navigate = useNavigate();
@@ -114,11 +134,10 @@ const MyPageContent = () => {
             ))}
           </div>
 
-          <div className="mypage-ad-banner">
-            <p>SOL Pick 추천 혜택</p>
-          </div>
+          {/* 기존 배너를 새로운 RecipeBanner 컴포넌트로 변경 */}
+          <RecipeBanner />
 
-          <div className="mypage-logout-container">
+          {/* <div className="mypage-logout-container">
             <ButtonS
               text="로그아웃"
               onClick={handleLogout}
@@ -126,6 +145,12 @@ const MyPageContent = () => {
               width="100px"
               height="36px"
             />
+          </div> */}
+
+          <div className="mypage-logout-container">
+            <button className="logout-text-button" onClick={handleLogout}>
+              로그아웃
+            </button>
           </div>
         </>
       )}

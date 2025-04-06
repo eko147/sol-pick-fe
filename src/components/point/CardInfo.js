@@ -75,8 +75,8 @@ const CardInfo = ({ cardInfo }) => {
 
   return (
     <div className="card-info-container">
-      <div className="completion-card-preview">
-        <div className="card-image">
+      <div className="card-info-completion-card-preview">
+        <div className="card-info-image">
           <img
             src={backgroundImage}
             alt="카드 배경"

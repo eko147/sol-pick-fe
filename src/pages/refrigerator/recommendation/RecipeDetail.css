@@ -1,115 +1,142 @@
 .recipe-detail-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 20px;
-  text-align: left;
   width: 100%;
-  max-width: 600px;
-  margin: 20px auto;
+  padding: 20px 16px;
+  background-color: #fff;
+  color: #333;
 }
 
 .recipe-detail-image {
-  width: 80%;
-  max-width: 400px;
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-info-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.recipe-info-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f7ff;
   border-radius: 12px;
-  margin-bottom: 16px;
-  align-self: center;
+  padding: 14px;
+  width: 48%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
-.recipe-info {
+.recipe-info-icon {
+  font-size: 22px;
+  margin-bottom: 6px;
+  color: #0a84ff;
+}
+
+.recipe-info-label {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.recipe-info-value {
+  font-size: 15px;
+  font-weight: 600;
+  color: #0a84ff;
+}
+
+.recipe-section-title {
+  align-self: flex-start;
   font-size: 18px;
-  margin-bottom: 20px;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  padding-left: 10px;
+  border-left: 3px solid #0a84ff;
+  color: #333;
 }
 
-.ingredient-list {
+.recipe-ingredient-list {
   list-style: none;
   padding: 0;
-  text-align: left;
-  width: 80%;
-  max-width: 400px;
-}
-
-.ingredient-list li {
-  background: #f9f9f9;
-  margin: 5px 0;
-  padding: 8px;
-  border-radius: 8px;
-}
-
-.cooking-steps {
-  text-align: left;
-  padding-left: 10px;
-  width: 80%;
-  max-width: 400px;
-}
-
-.cooking-steps li {
-  background: #eef;
-  margin: 5px 0;
-  padding: 10px;
-  border-radius: 8px;
-}
-h3 {
-  text-align: left;
   width: 100%;
-  margin-top: 24px; /* ✅ 위쪽 여백 추가 */
+  margin-bottom: 24px;
 }
-.has-ingredient {
-  background: #e6f7e6;
-  color: #228b22;
+
+.recipe-ingredient-list li {
+  background: #f8f9fa;
+  margin: 8px 0;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  position: relative;
+  padding-left: 20px;
+}
+
+.recipe-ingredient-list li::before {
+  content: "•";
+  color: #0a84ff;
+  font-weight: bold;
+  position: absolute;
+  left: 8px;
+}
+
+.recipe-cooking-steps {
+  padding-left: 0;
+  width: 100%;
+  counter-reset: step;
+}
+
+.recipe-cooking-steps li {
+  background: #f8f9fa;
+  margin: 8px 0;
+  padding: 14px;
+  padding-left: 40px;
+  border-radius: 10px;
+  font-size: 15px;
+  line-height: 1.5;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  list-style-type: none;
+  position: relative;
+}
+
+.recipe-cooking-steps li::before {
+  content: counter(step);
+  counter-increment: step;
+  position: absolute;
+  left: 12px;
+  top: 14px;
+  width: 20px;
+  height: 20px;
+  background-color: #0a84ff;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
   font-weight: bold;
 }
 
-.missing-ingredient {
-  background: #f0f0f0;
-  color: #808080;
-}
+/* 반응형 스타일 */
+@media (max-width: 375px) {
+  .recipe-detail-container {
+    padding: 12px;
+  }
 
-/* .recipe-detail-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 16px;
-    text-align: left;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-}
+  .recipe-detail-image {
+    height: 200px;
+  }
 
-.recipe-detail-image {
-    width: 80%;
-    max-width: 400px;
-    border-radius: 12px;
-    margin-bottom: 16px;
-    align-self: center;
+  .recipe-info-box {
+    padding: 10px;
+  }
 }
-
-.recipe-info {
-    text-align: left;
-    font-size: 18px;
-    margin-bottom: 20px;
-    width: 100%;
-}
-
-.ingredient-list,
-.cooking-steps {
-    list-style: none;
-    padding: 0;
-    width: 100%;
-}
-
-.ingredient-list li,
-.cooking-steps li {
-    background: #f9f9f9;
-    margin: 5px 0;
-    padding: 8px;
-    border-radius: 8px;
-    width: 100%;
-}
-
-h3 {
-    text-align: left;
-    width: 100%;
-    margin-top: 20px;
-} */

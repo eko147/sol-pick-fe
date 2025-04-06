@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import "./Onboarding.css";
-import igloo from "../../assets/logo/igloo.png";
-import refrigerator from "../../assets/logo/refrigerator.png";
+import logo from "../../assets/logo/logo.png";
 import { authApi } from "../../api/AuthApi";
 
 const Onboarding = () => {
@@ -38,8 +37,7 @@ const Onboarding = () => {
     >
       <motion.img
         // <img
-        src={igloo}
-        // src={refrigerator}
+        src={logo}
         alt="solpickLogo"
         className="solpick-logo"
         스프링
@@ -73,7 +71,7 @@ const Onboarding = () => {
             onClick={() => navigate("/login")}
             className="get-started-button"
           >
-            시작하기
+            ReciPICK 계정으로 시작하기
           </button>
         </motion.div>
       )}

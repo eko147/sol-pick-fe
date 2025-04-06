@@ -111,7 +111,7 @@ const getMockPointSummary = () => {
     currentPoints: 10000,
     totalEarnedPoints: 15500,
     totalUsedPoints: 5500,
-    message: "총 10,000포인트 있어요!",
+    message: "총 10,000 포인트 있어요!",
   };
 };
 

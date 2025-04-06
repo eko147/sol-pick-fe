@@ -3,6 +3,7 @@
   flex-direction: row;
   padding: 12px 24px;
   align-items: center;
+  cursor: pointer;
 }
 
 .ingredient-item-image {

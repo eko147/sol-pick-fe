@@ -6,6 +6,7 @@
   justify-content: center;
   text-align: center;
   padding: 20px;
+  overflow: auto;
 }
 
 /* 픽셀 폰트 적용 - 한글과 영문 모두 지원하는 폰트 스택 */
@@ -66,7 +67,6 @@
   text-align: left;
   position: relative;
   overflow: hidden;
-  width: 85%;
   max-width: 500px;
 }
 

@@ -54,6 +54,7 @@ const MainHeader = (
 
   // 샵 아이콘 클릭 핸들러
   const handleShopClick = () => {
+    window.open("http://localhost:8080/recipick/recipe", "_blank");
     // setIsLeftActive(!isLeftActive);
     // 레시픽 쇼핑몰 이동
   };

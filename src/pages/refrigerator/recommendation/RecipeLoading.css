@@ -12,13 +12,12 @@
 .recipe-loading-container h2 {
   font-size: 24px;
   color: #ff7f50;
-  /* color: #0a84ff; */
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .recipe-loading-container p {
-  font-size: 18px;
-  color: #333;
+  font-size: 16px;
+  color: #969696;
 }
 
 .pizza-animation {

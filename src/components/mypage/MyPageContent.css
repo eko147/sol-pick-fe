@@ -1,11 +1,10 @@
 .mypage-container {
   padding: 16px;
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
-  height: auto;
-  min-height: calc(100vh - 232px); /* 헤더 + 하단 메뉴 높이 고려 */
+  height: calc(100% - 56px);
   overflow-y: auto;
-  margin-bottom: 88px; /* 메뉴 높이 */
+  /* margin-bottom: 88px; */
   position: relative; /* 상대적 위치 설정을 위해 필요 */
 }
 
@@ -78,14 +77,92 @@
   font-size: 16px;
 }
 
-.mypage-logout-container {
+/* .mypage-logout-container {
   position: relative;
   display: flex;
   justify-content: flex-end;
-  margin-top: 16px; /* 광고 배너와의 간격 */
-  margin-bottom: 16px; /* 하단 여백 */
+  margin-top: 16px;
+  /* margin-top: 130px; */
+/* margin-bottom: 16px; */
+
+.logout-text-button {
+  background: none;
+  border: none;
+  color: #777777; /* 회색 글씨 */
+  font-size: 14px;
+  cursor: pointer;
+  padding: 10px 0;
+  text-decoration: underline; /* 밑줄 추가 */
 }
 
-.bold {
-  font-weight: bold;
+.logout-text-button:hover {
+  color: #444444; /* 호버 시 더 진한 회색 */
+}
+
+/* 로그아웃 버튼 컨테이너 스타일 조정 */
+.mypage-logout-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+/* MyPageContent.css에 추가할 스타일 */
+
+.recipe-banner {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #e6f0ff 0%, #d1e6ff 100%);
+  border-radius: 16px;
+  padding: 16px 20px;
+  box-shadow: 0 2px 8px rgba(10, 132, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.recipe-banner::before {
+  content: "";
+  position: absolute;
+  top: -25px;
+  right: -25px;
+  width: 100px;
+  height: 100px;
+  background-color: rgba(10, 132, 255, 0.1);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.recipe-banner-icon {
+  display: flex;
+  gap: 8px;
+  margin-right: 16px;
+  z-index: 1;
+}
+
+.recipe-banner-content {
+  flex: 1;
+  z-index: 1;
+}
+
+.recipe-banner-content h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #0a84ff;
+  margin: 0 0 4px 0;
+}
+
+.recipe-banner-content p {
+  font-size: 14px;
+  color: #3377cc;
+  margin: 0;
+}
+
+.recipe-banner-headphone {
+  margin-left: auto;
+  z-index: 1;
+}
+
+/* 기존 배너 스타일은 유지하거나 변경할 수 있습니다 */
+.mypage-ad-banner {
+  display: none; /* 기존 배너를 숨기고 새 배너를 사용할 경우 */
 }

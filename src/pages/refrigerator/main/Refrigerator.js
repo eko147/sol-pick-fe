@@ -12,6 +12,7 @@ import MainHeader from "../../../components/common/header/MainHeader";
 import recipe from "../../../assets/recipe.svg";
 import { ingredientApi } from "../../../api/IngredientApi";
 import { useToast } from "../../../context/ToastContext";
+import RecipickSyncApi, { useRecipickSync } from "../../../api/RecipickSyncApi"; // 레시픽 주문 동기화
 
 const Refrigerator = () => {
   const navigate = useNavigate();
@@ -24,6 +25,9 @@ const Refrigerator = () => {
   // 터치(스와이프) 이벤트
   const [touchStart, setTouchStart] = useState(null);
   const { showToast } = useToast();
+
+  // 레시픽 주문 동기화
+  const { startPeriodicSync, stopPeriodicSync } = useRecipickSync();
 
   // 터치/마우스 이벤트 핸들러
   const handleSwipeStart = (clientX, e) => {
@@ -72,15 +76,44 @@ const Refrigerator = () => {
   // 한 냉장고에 표시할 최대 식재료 수
   const MAX_INGREDIENTS_PER_REFRIGERATOR = 15;
 
-  // 식재료 데이터 가져오기
+  // 식재료 데이터 가져오기 및 동기화 수행
   useEffect(() => {
     fetchIngredients();
+
+    // 냉장고 페이지 진입 시 레시픽 동기화 한 번 실행
+    const syncOnce = async () => {
+      try {
+        console.log("냉장고 페이지 진입 - 레시픽 동기화 실행");
+        const result = await RecipickSyncApi.syncRecipickOrders();
+
+        // 동기화 결과 확인 (새 항목이 추가된 경우)
+        if (result.success && result.count && result.count > 0) {
+          // 새 식재료가 추가되었다면 목록 새로고침
+          console.log(`${result.count}개의 새 식재료가 동기화되었습니다.`);
+          fetchIngredients(); // 식재료 목록 다시 가져오기
+        }
+      } catch (error) {
+        console.error("동기화 중 오류 발생:", error);
+      }
+    };
+
+    // 동기화 실행
+    syncOnce();
   }, []);
 
   // 식재료 목록 불러오기 (최신순)
   const fetchIngredients = async () => {
     setLoading(true);
     try {
+      // // 먼저 동기화 실행
+      // console.log("냉장고 페이지 진입 - 레시픽 동기화 실행");
+      // const syncResult = await RecipickSyncApi.syncRecipickOrders();
+
+      // // 동기화 결과 확인 (새 항목이 추가된 경우)
+      // if (syncResult.success && syncResult.count && syncResult.count > 0) {
+      //   console.log(`${syncResult.count}개의 새 식재료가 동기화되었습니다.`);
+      // }
+
       // 최신순으로 식재료 목록 가져오기
       const response = await ingredientApi.getIngredientList("latest");
 
@@ -114,24 +147,37 @@ const Refrigerator = () => {
       return [[]];
     }
 
+    // 현재 날짜
+    const now = new Date();
+
     // 식재료 데이터 가공
-    const formattedData = data.map((ingredient, index) => ({
-      id: ingredient.id,
-      name: ingredient.name,
-      emoji: ingredient.emoji || "🍎", // 기본 이모지
-      image: getIngredientImageFromEmoji(ingredient.emoji || "🍎"), // 이모지 기반 매핑된 이미지 (냉장고 메인용)
-      originalImage: ingredient.image, // DB에 저장된 이미지 (상세 팝업 및 상세 목록용)
-      size: 50, // 고정 크기
-      x: calculateXPosition(index % 3), // x 위치 계산
-      // 추가 속성들 (상세 팝업용)
-      expiryDate: ingredient.expiryDate,
-      quantity: ingredient.quantity,
-      mainCategory: ingredient.mainCategory,
-      subCategory: ingredient.subCategory,
-      detailCategory: ingredient.detailCategory,
-      createdAt: ingredient.createdAt,
-      updatedAt: ingredient.updatedAt,
-    }));
+    const formattedData = data.map((ingredient, index) => {
+      // 등록일 확인
+      const createdDate = new Date(ingredient.createdAt);
+      const daysDiff = Math.floor((now - createdDate) / (1000 * 60 * 60 * 24));
+
+      // 3일 이내 등록된 식재료인지 여부
+      const isNew = daysDiff <= 3;
+
+      return {
+        id: ingredient.id,
+        name: ingredient.name,
+        emoji: ingredient.emoji || "🍎", // 기본 이모지
+        image: getIngredientImageFromEmoji(ingredient.emoji || "🍎"), // 이모지 기반 매핑된 이미지 (냉장고 메인용)
+        originalImage: ingredient.image, // DB에 저장된 이미지 (상세 팝업 및 상세 목록용)
+        size: 50, // 고정 크기
+        x: calculateXPosition(index % 3), // x 위치 계산
+        // 추가 속성들 (상세 팝업용)
+        expiryDate: ingredient.expiryDate,
+        quantity: ingredient.quantity,
+        mainCategory: ingredient.mainCategory,
+        subCategory: ingredient.subCategory,
+        detailCategory: ingredient.detailCategory,
+        createdAt: ingredient.createdAt,
+        updatedAt: ingredient.updatedAt,
+        isNew: isNew, // NEW 표시 여부
+      };
+    });
 
     // 냉장고 페이지 개수 계산
     const totalPages = Math.ceil(
@@ -372,6 +418,10 @@ const Refrigerator = () => {
                               cursor: "pointer",
                             }}
                           >
+                            {/* NEW 뱃지 조건부 렌더링 */}
+                            {ingredient.isNew && (
+                              <div className="new-badge bold">N</div>
+                            )}
                             <img
                               src={ingredient.image}
                               alt={ingredient.name}
@@ -410,7 +460,7 @@ const Refrigerator = () => {
       {/* 레시피 추천 페이지 이동 버튼 */}
       <div
         className="recipe-recommend-button recipe-recommend-button-pulse"
-        onClick={() => navigate("/recipe-recommendation")}
+        onClick={() => navigate("/refrigerator/recipe-recommendation")}
       >
         <img src={recipe} alt="recipe" className="recipe-recommend-icon" />
       </div>

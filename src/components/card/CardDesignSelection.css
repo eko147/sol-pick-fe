@@ -4,7 +4,6 @@
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
-  font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
   position: relative;
 }
 
@@ -17,7 +16,7 @@
 
 /* 타이틀 영역 */
 .card-design-title {
-  padding-bottom: 28px;
+  padding-bottom: 32px;
   text-align: left;
 }
 
@@ -33,17 +32,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 20px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 /* 카드 이미지 스타일 */
 .select-card-image {
-  width: 300px;
-  height: 180px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 20px 0;
 }
 
 /* 기본 카드 앞면 */
@@ -92,25 +88,24 @@
 }
 
 /* 버튼(앞면, 뒷면, 꾸미러 가기) 영역 */
-.design-selection {
+.card-design-selection {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
   text-align: center;
   position: relative;
 }
 
-.design-label {
+.card-design-label {
   font-size: 16px;
   font-weight: 500;
-  margin-bottom: 15px;
   color: #333;
-  margin-top: 5px;
+  margin: 20px 0;
 }
 
-.design-button {
+.card-design-button {
+  width: auto;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 12px;
@@ -121,17 +116,17 @@
   transition: all 0.2s;
 }
 
-.design-button:hover {
+.card-design-button:hover {
   background-color: #f8f8f8;
 }
 
-.custom-design-button {
+.custom-card-design-button {
   background-color: #0a84ff;
   color: #ffffff;
   border: none;
 }
 
-.custom-design-button:hover {
+.custom-card-design-button:hover {
   background-color: #0a84ff;
 }
 

@@ -104,7 +104,11 @@ const NotiList = ({ notifications = [], onNotificationClick }) => {
               <NotiItem
                 type={noti.type}
                 title={
-                  noti.type === "expiration" ? "유통기한 알림" : "재구매 알림"
+                  noti.type === "expiration"
+                    ? "유통기한 알림"
+                    : noti.type === "reorder"
+                    ? "재구매 알림"
+                    : "냉장고 알림"
                 }
                 description={noti.message}
                 timestamp={noti.formattedTime}

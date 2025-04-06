@@ -28,7 +28,7 @@ const EventCard = ({ title, description, image, bgColor, additionalDate }) => {
 const EventSection = ({ sectionTitle, events }) => {
   return (
     <div className="event-section">
-      <h2 className="section-title bold">{sectionTitle}</h2>
+      <h2 className="event-section-title bold">{sectionTitle}</h2>
       <div className="event-list">
         {events.map((event, index) => (
           <EventCard

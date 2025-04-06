@@ -38,6 +38,19 @@
   gap: 4px;
   box-sizing: border-box;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ingredient-add-row-button:hover {
+  background-color: #007be5;
+  transform: scale(1.01);
+  box-shadow: 0 3px 5px rgba(10, 132, 255, 0.2);
+}
+
+.ingredient-add-row-button:active {
+  background-color: #0066c2;
+  box-shadow: 0 1px 3px rgba(10, 132, 255, 0.15);
+  transform: scale(1);
 }
 
 .ingredient-add-ment {

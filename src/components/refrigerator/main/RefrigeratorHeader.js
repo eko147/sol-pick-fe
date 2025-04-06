@@ -14,7 +14,7 @@ const RefrigeratorHeader = ({ totalIngredients, onAddClick }) => {
           <h3 className="refrigerator-header-title bold">나의 냉장고</h3>
 
           <div className="ingredient-add-row-button" onClick={onAddClick}>
-            <p className="ingredient-add-ment">추가하기</p>
+            <p className="ingredient-add-ment">등록하기</p>
             <img src={plus} alt="plus" className="plus-icon" />
           </div>
         </div>

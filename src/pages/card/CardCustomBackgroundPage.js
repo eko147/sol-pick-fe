@@ -22,7 +22,7 @@ const CardCustomBackgroundPage = () => {
   const handleNext = () => navigate("/card/apply/custom/sticker");
 
   return (
-    <div className="card-custom-background-page-container">
+    <>
       <Header
         leftIcon={backArrow}
         title="카드 디자인"
@@ -31,12 +31,14 @@ const CardCustomBackgroundPage = () => {
         onRightClick={handleClose}
       />
 
-      <div className="card-custom-background-component-container">
-        <CardCustomBackground onNext={handleNext} />
+      <div className="card-custom-background-page-container">
+        <div className="card-custom-background-component-container">
+          <CardCustomBackground onNext={handleNext} />
+        </div>
       </div>
 
       <Menu />
-    </div>
+    </>
   );
 };
 

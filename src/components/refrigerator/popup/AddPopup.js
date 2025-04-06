@@ -69,7 +69,7 @@ const AddPopup = ({ isOpen, onClose }) => {
             >
               <div className="add-popup-header">
                 <h3 className="add-popup-title bold">
-                  등록 방법을 선택해주세요
+                  식재료 등록 방법을 선택해주세요
                 </h3>
                 <img
                   src={closeIcon}
@@ -86,9 +86,9 @@ const AddPopup = ({ isOpen, onClose }) => {
                 >
                   <div className="add-option-title bold">영수증 촬영하기</div>
                   <div className="add-option-description">
-                    OCR 인식을 통해 일일이 입력할 필요없이
+                    장보기 후 영수증만 찍으면 끝!
                     <br />
-                    영수증을 촬영하여 손쉽게 등록할 수 있어요!
+                    자동으로 상품명을 인식해 한 번에 등록할 수 있어요.
                   </div>
                 </div>
 
@@ -98,9 +98,9 @@ const AddPopup = ({ isOpen, onClose }) => {
                 >
                   <div className="add-option-title bold">직접 입력하기</div>
                   <div className="add-option-description">
-                    꼼꼼하게 확인하며 내가 직접
+                    필요한 내용을 하나씩 꼼꼼히 기록하고
                     <br />
-                    식재료 정보를 입력하여 추가할 수 있어요!
+                    원하는 만큼 추가로 등록할 수 있어요.
                   </div>
                 </div>
               </div>

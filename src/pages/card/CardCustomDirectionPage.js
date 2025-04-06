@@ -22,7 +22,7 @@ const CardCustomDirectionPage = () => {
   const handleNext = () => navigate("/card/apply/custom/background");
 
   return (
-    <div className="card-custom-direction-page-container">
+    <>
       <Header
         leftIcon={backArrow}
         title="카드 디자인"
@@ -30,13 +30,13 @@ const CardCustomDirectionPage = () => {
         onLeftClick={handleBack}
         onRightClick={handleClose}
       />
-
-      <div className="card-custom-direction-component-container">
-        <CardCustomDirection onNext={handleNext} />
+      <div className="card-custom-direction-page-container">
+        <div className="card-custom-direction-component-container">
+          <CardCustomDirection onNext={handleNext} />
+        </div>
       </div>
-
       <Menu />
-    </div>
+    </>
   );
 };
 

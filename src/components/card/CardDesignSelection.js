@@ -77,20 +77,20 @@ const CardDesign = ({ onNext, onCustomize }) => {
   const renderDesignButton = () => {
     if (cardView === CARD_VIEWS.FRONT_BASIC) {
       return (
-        <button className="design-button" onClick={handleFlipCard}>
+        <button className="card-design-button" onClick={handleFlipCard}>
           뒷면 보기
         </button>
       );
     } else if (cardView === CARD_VIEWS.BACK_BASIC) {
       return (
-        <button className="design-button" onClick={handleFlipCard}>
+        <button className="card-design-button" onClick={handleFlipCard}>
           앞면 보기
         </button>
       );
     } else if (cardView === CARD_VIEWS.FRONT_CUSTOM) {
       return (
         <button
-          className="design-button custom-design-button"
+          className="card-design-button custom-design-button"
           onClick={onCustomize}
         >
           꾸미러 가기 ✨
@@ -203,8 +203,8 @@ const CardDesign = ({ onNext, onCustomize }) => {
           </div>
 
           {/* 디자인 선택 영역 */}
-          <div className="design-selection">
-            <p className="design-label">{getDesignLabelText()}</p>
+          <div className="card-design-selection">
+            <p className="card-design-label">{getDesignLabelText()}</p>
             {renderDesignButton()}
           </div>
         </div>

@@ -16,16 +16,17 @@ const FavoritesPage = () => {
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
 
+  // 찜한 레시피 데이터 가져오기
   useEffect(() => {
     const fetchFavoriteRecipes = async () => {
       try {
         setLoading(true);
         const recipes = await recipeApi.getLikedRecipes();
         setFavoriteRecipes(recipes);
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching favorite recipes:", error);
         setError("찜한 레시피를 불러오는데 실패했습니다.");
+      } finally {
         setLoading(false);
       }
     };
@@ -33,8 +34,8 @@ const FavoritesPage = () => {
     fetchFavoriteRecipes();
   }, []);
 
+  // 레시피 클릭 핸들러
   const handleRecipeClick = (recipe) => {
-    // Navigate to recipe detail page with recipe data in state
     navigate(`/mypage/recipe/${recipe.id}`, {
       state: {
         recipe: {
@@ -63,7 +64,6 @@ const FavoritesPage = () => {
       </div>
 
       {showToast && <ToastMessage message={toastMessage} duration={3000} />}
-      <Menu />
     </div>
   );
 };

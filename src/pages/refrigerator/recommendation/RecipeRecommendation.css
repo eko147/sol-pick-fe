@@ -1,17 +1,18 @@
-/* 레시피 추천 페이지 전체 스타일 */
+/* 레시피 추천 페이지 전체 스타일 수정 */
 .recipe-recommendation-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 100vh;
+  justify-content: space-between;
   background-color: white;
-  padding: 20px;
-  margin-top: -80px;
+  padding: 20px 16px;
+  margin-top: 0; /* 변경: -130px에서 0으로 */
+  position: relative; /* 추가: 포지셔닝 컨텍스트 설정 */
+  height: calc(100% - 56px);
 }
 
-/* 레시피 그리드 */
-.recipe-grid {
+/* 나머지 스타일은 그대로 유지 */
+.recipe-recommendation-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 16px;
@@ -19,7 +20,6 @@
   max-width: 600px;
 }
 
-/* 레시피 카드 스타일 */
 .recipe-card {
   border: none;
   background-color: white;
@@ -34,14 +34,12 @@
   transform: scale(1.05);
 }
 
-/* 레시피 이미지 */
 .recommend-recipe-image {
   width: 100%;
   height: 120px;
   object-fit: cover;
 }
 
-/* 레시피 이름 */
 .recommend-recipe-name {
   font-size: 16px;
   font-weight: bold;
@@ -49,19 +47,6 @@
   padding: 10px;
 }
 
-/* 추천 다시 받기 버튼 */
 .refresh-button {
-  margin-top: 20px;
-  background-color: #0a84ff;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  font-size: 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.refresh-button:hover {
-  background-color: #0a84ff;
+  margin-bottom: 16px;
 }
