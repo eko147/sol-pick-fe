@@ -8,9 +8,9 @@ import RecipeSelection from "../../components/game/RecipeSelection";
 import Header from "../../components/common/header/Header";
 import backArrow from "../../assets/backArrow.svg";
 import close from "../../assets/close.svg";
-import "./GameInitPage.css";
+import "./RecipeSelectionPage.css";
 
-const GameInitPage = () => {
+const RecipeSelectionPage = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -87,4 +87,4 @@ const GameInitPage = () => {
   );
 };
 
-export default GameInitPage;
+export default RecipeSelectionPage;
